@@ -11,3 +11,11 @@
   width: 22px;
   height: 19px;
 }
+
+.elements__like:hover {
+  opacity: 0.5;
+}
+
+.elements__like:active {
+  background-image: url(../../../images/heart_full.svg);
+}
