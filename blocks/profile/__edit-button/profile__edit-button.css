@@ -11,6 +11,8 @@
   width: 24px;
   height: 24px;
   box-sizing: border-box;
+  cursor: pointer;
+  transition: opacity 100ms ease-in-out;
 }
 
 @media (max-width: 768px) {

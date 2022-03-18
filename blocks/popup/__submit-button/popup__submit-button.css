@@ -6,14 +6,16 @@
   padding: 0;
   border: 0;
   border-radius: 2px;
+  font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   text-align: center;
   color: #fff;
   background-color: #000;
-  width: 358px;
+  min-width: 358px;
   height: 50px;
-  /* transition: opacity 100ms ease-in-out; */
+  cursor: pointer;
+  transition: opacity 100ms ease-in-out;
 }
 
 .popup__submit-button:hover {
@@ -22,6 +24,12 @@
 
 @media (max-width: 500px) {
   .popup__submit-button {
-    max-width: calc(100% - 44px);
+    min-width: calc(100% - 44px);
+    margin-top: 45px;
+    margin-bottom: 25px;
+    margin-left: 22px;
+    margin-right: 22px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

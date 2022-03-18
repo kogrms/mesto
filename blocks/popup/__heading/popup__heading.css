@@ -2,16 +2,23 @@
   margin: 0;
   padding: 0;
   margin-top: 34px;
+  margin-bottom: 46px;
   margin-left: 36px;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
   color: #000;
-  max-width: 358px;
+  min-width: 358px;
 }
 
 @media (max-width: 500px) {
   .popup__heading {
-    max-width: calc(100% - 44px);
+    min-width: calc(100% - 44px);
+    margin-top: 25px;
+    margin-bottom: 75px;
+    margin-left: 22px;
+    margin-right: 22px;
+    font-size: 18px;
+    line-height: 22px;
   }
 }
