@@ -9,6 +9,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: calc(100% - 42px);
 }
 
 @media (max-width: 768px) {
@@ -17,6 +18,7 @@
     font-size: 27px;
     line-height: 1.222;
     text-align: center;
+    max-width: calc(100% - 28px);
   }
 }
 
@@ -29,6 +31,5 @@
 @media (max-width: 500px) {
   .profile__name {
     margin-top: 26px;
-    margin-left: 28px;
   }
 }

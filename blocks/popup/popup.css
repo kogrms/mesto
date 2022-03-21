@@ -1,7 +1,7 @@
 .popup {
   margin: 0;
   padding: 0;
-  /* display: none; */
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;

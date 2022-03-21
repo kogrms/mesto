@@ -24,3 +24,7 @@
 .popup__position-form::placeholder {
   color: #000;
 }
+
+.popup__position-form:active {
+  border: none;
+}
