@@ -8,8 +8,8 @@ let editButton = document.querySelector('.profile__edit-button');
 // find form in DOM
 let formElement = document.querySelector('.form');
 // find inputs in form
-let nameInput = formElement.querySelector('.form__name-input');
-let positionInput = formElement.querySelector('.form__position-input');
+let nameInput = formElement.querySelector('.form__input_value_name');
+let positionInput = formElement.querySelector('.form__input_value_position');
 // find close button in popup
 let closeButton = popup.querySelector('.popup__close');
 
@@ -44,4 +44,4 @@ editButton.addEventListener('click', editClickFunction);
 // close button listener
 closeButton.addEventListener('click', closeClickFunction);
 // submit handler
-editForm.addEventListener('submit', submitFormFunction);
+formElement.addEventListener('submit', submitFormFunction);

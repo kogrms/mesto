@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  bottom: 338px;
+  bottom: 344px;
   left: 438px;
   background: 0;
   background-image: url(../../../images/close_icon.svg);
@@ -33,6 +33,7 @@
 
 @media (max-width: 500px) {
   .popup__close {
+    bottom: 342px;
     left: calc(100vw - 58px);
   }
 }
