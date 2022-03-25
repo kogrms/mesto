@@ -1,4 +1,4 @@
-.popup__position-form {
+.form__position-input {
   margin: 0;
   padding: 0;
   margin-left: 36px;
@@ -14,17 +14,17 @@
 }
 
 @media (max-width: 500px) {
-  .popup__position-form {
+  .form__position-input {
     min-width: calc(100% - 44px);
     margin-left: 22px;
     margin-right: 22px;
   }
 }
 
-.popup__position-form::placeholder {
+.form__position-input::placeholder {
   color: #000;
 }
 
-.popup__position-form:active {
+.form__position-input:active {
   border: none;
 }

@@ -1,4 +1,4 @@
-.popup__submit-button {
+.form__submit-button {
   margin-top: 48px;
   margin-bottom: 37px;
   margin-left: 36px;
@@ -18,12 +18,12 @@
   transition: opacity 100ms ease-in-out;
 }
 
-.popup__submit-button:hover {
+.form__submit-button:hover {
   opacity: 0.8;
 }
 
 @media (max-width: 500px) {
-  .popup__submit-button {
+  .form__submit-button {
     min-width: calc(100% - 44px);
     margin-top: 45px;
     margin-bottom: 25px;

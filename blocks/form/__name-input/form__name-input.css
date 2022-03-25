@@ -1,4 +1,4 @@
-.popup__name-form {
+.form__name-input {
   margin: 0;
   padding: 0;
   margin-bottom: 30px;
@@ -15,13 +15,13 @@
 }
 
 @media (max-width: 500px) {
-  .popup__name-form {
+  .form__name-input {
     min-width: calc(100% - 44px);
     margin-left: 22px;
     margin-right: 22px;
   }
 }
 
-.popup__name-form::placeholder {
+.form__name-input::placeholder {
   color: #000;
 }

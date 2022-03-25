@@ -6,12 +6,13 @@
   color: #545454;
   font-weight: 400;
   font-size: 18px;
-  line-height: 1.21;
+  line-height: 22px;
 }
 
 @media (max-width: 500px) {
   .footer__copyright {
     font-size: 14px;
+    line-height: 17px;
     margin-top: 48px;
     margin-bottom: 36px;
   }
