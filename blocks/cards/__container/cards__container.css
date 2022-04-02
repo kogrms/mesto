@@ -1,4 +1,4 @@
-.elements__container {
+.cards__container {
   margin: 0;
   padding: 0;
   display: grid;
@@ -10,13 +10,13 @@
 }
 
 @media (max-width: 917px) {
-  .elements__container {
+  .cards__container {
     grid-template-columns: repeat(2, 282px);
   }
 }
 
 @media (max-width: 618px) {
-  .elements__container {
+  .cards__container {
     grid-template-columns: 282px;
   }
 }

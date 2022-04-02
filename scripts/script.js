@@ -32,6 +32,8 @@ const initialCards = [
   }
 ];
 
+// find elements__container in DOM
+const cardsContainer = document.querySelector('.cards__container');
 // find popup-edit in DOM
 const popupEdit = document.querySelector('.popup-edit');
 // find popup-add in DOM
@@ -41,27 +43,27 @@ const profileName = document.querySelector('.profile__name');
 // find profile position in DOM
 const profilePosition = document.querySelector('.profile__position');
 // find edit button in DOM
-const editButton = document.querySelector('.profile__edit-button');
+const buttonEdit = document.querySelector('.profile__edit-button');
 // find add button in DOM
-const addButton = document.querySelector('.profile__add-button');
+const buttonAdd = document.querySelector('.profile__add-button');
 // find form in DOM
 const formElement = document.querySelector('.form');
 // find name and position inputs in form
-const nameInput = formElement.querySelector('.form__input_value_name');
-const positionInput = formElement.querySelector('.form__input_value_position');
+const inputName = formElement.querySelector('.form__input_value_name');
+const inputPosition = formElement.querySelector('.form__input_value_position');
 // find close button in popup-edit
-const closeEditButton = popupEdit.querySelector('.popup-edit__close');
+const buttonCloseEdit = popupEdit.querySelector('.popup-edit__close');
 // find close button in popup-add
-const closeAddButton = popupAdd.querySelector('.popup-add__close');
+const buttonCloseAdd = popupAdd.querySelector('.popup-add__close');
 
 // 1) open popup-edit
 function openPopupEdit() {
   // popup-edit__opened class add
   popupEdit.classList.add('popup-edit_opened');
   // insert name in name input
-  nameInput.value = profileName.textContent;
+  inputName.value = profileName.textContent;
   // insert position in position input
-  positionInput.value = profilePosition.textContent;
+  inputPosition.value = profilePosition.textContent;
 }
 
 // 2) open popup-add
@@ -86,8 +88,8 @@ function closePopupAdd() {
 function submitFormEdit (evt) {
   evt.preventDefault();
   // profile name and position replace by input values
-  profileName.textContent = nameInput.value;
-  profilePosition.textContent = positionInput.value;
+  profileName.textContent = inputName.value;
+  profilePosition.textContent = inputPosition.value;
   // close popup-edit
   closePopupEdit();
 }
@@ -95,13 +97,13 @@ function submitFormEdit (evt) {
 // 5) submit add form
 
 // edit button listener
-editButton.addEventListener('click', openPopupEdit);
+buttonEdit.addEventListener('click', openPopupEdit);
 // add button listener
-addButton.addEventListener('click', openPopupAdd);
+buttonAdd.addEventListener('click', openPopupAdd);
 // close edit button listener
-closeEditButton.addEventListener('click', closePopupEdit);
+buttonCloseEdit.addEventListener('click', closePopupEdit);
 // close add button listener
-closeAddButton.addEventListener('click', closePopupAdd);
+buttonCloseAdd.addEventListener('click', closePopupAdd);
 // submit edit handler
 formElement.addEventListener('submit', submitFormEdit);
 
