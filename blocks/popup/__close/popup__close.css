@@ -1,4 +1,4 @@
-.popup-edit__close {
+.popup__close {
   margin: 0;
   padding: 0;
   position: absolute;
@@ -16,7 +16,7 @@
 }
 
 @media (max-width: 548px) {
-  .popup-edit__close {
+  .popup__close {
     width: 20px;
     height: 20px;
     bottom: 346px;
@@ -25,19 +25,19 @@
 }
 
 @media (max-width: 524px) {
-  .popup-edit__close {
+  .popup__close {
     bottom: 346px;
     left: 410px;
   }
 }
 
 @media (max-width: 500px) {
-  .popup-edit__close {
+  .popup__close {
     bottom: 342px;
     left: calc(100vw - 58px);
   }
 }
 
-.popup-edit__close:hover {
+.popup__close:hover {
   opacity: .6;
 }

@@ -1,4 +1,4 @@
-// set initial cards info
+// define initial cards info
 const initialCards = [
   {
     name: 'Санкт-Петербург',
@@ -31,13 +31,19 @@ const initialCards = [
     alt: 'Морской Никольский собор'
   }
 ];
+const initialCardsNames = initialCards.map(el => el.name);
+const initialCardsLinks = initialCards.map(el => el.link);
+const initialCardsAlts = initialCards.map(el => el.alt);
+console.log(initialCardsNames);
+console.log(initialCardsLinks);
+console.log(initialCardsAlts);
 
-// find elements__container in DOM
+// find cards__container in DOM
 const cardsContainer = document.querySelector('.cards__container');
-// find popup-edit in DOM
-const popupEdit = document.querySelector('.popup-edit');
-// find popup-add in DOM
-const popupAdd = document.querySelector('.popup-add');
+// find edit popup in DOM
+const popupEdit = document.querySelector('.popup_type_edit');
+// find add popup in DOM
+const popupAdd = document.querySelector('.popup_type_add');
 // find profile name in DOM
 const profileName = document.querySelector('.profile__name');
 // find profile position in DOM
@@ -46,55 +52,76 @@ const profilePosition = document.querySelector('.profile__position');
 const buttonEdit = document.querySelector('.profile__edit-button');
 // find add button in DOM
 const buttonAdd = document.querySelector('.profile__add-button');
-// find form in DOM
-const formElement = document.querySelector('.form');
-// find name and position inputs in form
-const inputName = formElement.querySelector('.form__input_value_name');
-const inputPosition = formElement.querySelector('.form__input_value_position');
-// find close button in popup-edit
-const buttonCloseEdit = popupEdit.querySelector('.popup-edit__close');
-// find close button in popup-add
-const buttonCloseAdd = popupAdd.querySelector('.popup-add__close');
+// find edit form in DOM
+const formEdit = popupEdit.querySelector('.form');
+// find name and position inputs in edit form
+const inputName = formEdit.querySelector('.form__input_value_name');
+const inputPosition = formEdit.querySelector('.form__input_value_position');
+// find close button in edit popup
+const buttonCloseEdit = popupEdit.querySelector('.popup__close');
+// find close button in add popup
+const buttonCloseAdd = popupAdd.querySelector('.popup__close');
 
-// 1) open popup-edit
+// create card template
+const createCard = (photoName, photoLink, photoAlt) => {
+  return `<li class="card">
+  <button type="button" class="card__delete" aria-label="Кнопка удаления фотографии"></button>
+  <img class="card__image" src="" alt="">
+  <div class="card__info">
+    <h3 class="card__heading"></h3>
+    <button type="button" class="card__like" aria-label="Кнопка оценки фотографии"></button>
+  </div>
+</li>`
+};
+
+const renderCards = () => {
+
+}
+
+
+
+
+// open edit popup
 function openPopupEdit() {
-  // popup-edit__opened class add
-  popupEdit.classList.add('popup-edit_opened');
+  // popup__opened class add
+  popupEdit.classList.add('popup_opened');
   // insert name in name input
   inputName.value = profileName.textContent;
   // insert position in position input
   inputPosition.value = profilePosition.textContent;
-}
+};
 
-// 2) open popup-add
+// open add popup
 function openPopupAdd() {
-  // popup-add__opened class add
-  popupAdd.classList.add('popup-add_opened');
-}
+  // popup__opened class add
+  popupAdd.classList.add('popup_opened');
+};
 
-// 3) close popup-edit
+// close edit popup
 function closePopupEdit() {
-  // popup-edit__opened class remove
-  popupEdit.classList.remove('popup-edit_opened');
-}
+  // popup__opened class remove
+  popupEdit.classList.remove('popup_opened');
+};
 
-// 4) close popup-add
+// close add popup
 function closePopupAdd() {
-  // popup-add__opened class remove
-  popupAdd.classList.remove('popup-add_opened');
-}
+  // popup__opened class remove
+  popupAdd.classList.remove('popup_opened');
+};
 
-// 5) submit edit form
+// submit edit form
 function submitFormEdit (evt) {
   evt.preventDefault();
   // profile name and position replace by input values
   profileName.textContent = inputName.value;
   profilePosition.textContent = inputPosition.value;
-  // close popup-edit
+  // close edit popup
   closePopupEdit();
-}
+};
 
-// 5) submit add form
+
+// submit add form
+
 
 // edit button listener
 buttonEdit.addEventListener('click', openPopupEdit);
@@ -105,6 +132,7 @@ buttonCloseEdit.addEventListener('click', closePopupEdit);
 // close add button listener
 buttonCloseAdd.addEventListener('click', closePopupAdd);
 // submit edit handler
-formElement.addEventListener('submit', submitFormEdit);
+formEdit.addEventListener('submit', submitFormEdit);
+
 
 // submit add handler
