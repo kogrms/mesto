@@ -1,3 +1,37 @@
+// declare initial cards info
+const initialCards = [
+  {
+    name: 'Санкт-Петербург',
+    link: './images/spb.jpg',
+    alt: 'Дворцовая площадь Санкт-Петербурга'
+  },
+  {
+    name: 'Москва',
+    link: './images/moscow.jpg',
+    alt: 'Деловой центр Москва-Сити'
+  },
+  {
+    name: 'Кижи',
+    link: './images/kizhy.jpg',
+    alt: 'Архитектурный ансамбль погоста Кижи'
+  },
+  {
+    name: 'Хибины',
+    link: './images/khibiny.jpg',
+    alt: 'Заснеженные Хибины'
+  },
+  {
+    name: 'Мурманск',
+    link: './images/murmansk.jpg',
+    alt: 'Памятник Защитникам Советского Заполярья'
+  },
+  {
+    name: 'Кронштадт',
+    link: './images/kronshtadt.jpg',
+    alt: 'Морской Никольский собор'
+  }
+];
+
 // find popup-edit in DOM
 const popupEdit = document.querySelector('.popup-edit');
 // find popup-add in DOM
