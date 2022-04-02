@@ -1,4 +1,4 @@
-// declare initial cards info
+// set initial cards info
 const initialCards = [
   {
     name: 'Санкт-Петербург',
@@ -92,6 +92,8 @@ function submitFormEdit (evt) {
   closePopupEdit();
 }
 
+// 5) submit add form
+
 // edit button listener
 editButton.addEventListener('click', openPopupEdit);
 // add button listener
@@ -102,3 +104,5 @@ closeEditButton.addEventListener('click', closePopupEdit);
 closeAddButton.addEventListener('click', closePopupAdd);
 // submit edit handler
 formElement.addEventListener('submit', submitFormEdit);
+
+// submit add handler
