@@ -1,4 +1,3 @@
-// define initial cards info
 const initialCards = [
   {
     name: 'Санкт-Петербург',
@@ -54,12 +53,8 @@ const buttonCloseAdd = popupAdd.querySelector('.popup__close');
 // find cards__container in DOM
 const cardsContainer = document.querySelector('.cards__container');
 
-//////////////////////////////////////////////////////////////////////////
-
 const createCard = (photoName, photoLink) => {
-  // find card template in DOM
   const cardTemplate = document.querySelector('#card-template').content;
-  // clone card template
   const card = cardTemplate.querySelector('.card').cloneNode(true);
   card.querySelector('.card__heading').textContent = photoName;
   card.querySelector('.card__image').src = photoLink;
@@ -69,6 +64,12 @@ const createCard = (photoName, photoLink) => {
 const renderCard = (photoName, photoLink) => {
   cardsContainer.prepend(createCard(photoName, photoLink));
 };
+
+// close add popup
+function closePopupAdd() {
+  popupAdd.classList.remove('popup_opened');
+};
+
 // add new card
 const addCard = (evt) => {
   evt.preventDefault();
@@ -77,6 +78,7 @@ const addCard = (evt) => {
   renderCard(photoName, photoLink);
   inputPhotoName.value = '';
   inputPhotoLink.value = '';
+  closePopupAdd();
 }
 // create initial cards
 const createInitialCards = initialCards.map(function(initialCard) {
@@ -88,30 +90,21 @@ cardsContainer.append(...createInitialCards);
 
 // open edit popup
 function openPopupEdit() {
-  // popup__opened class add
   popupEdit.classList.add('popup_opened');
-  // insert name in name input
+  // insert name and position in inputs
   inputName.value = profileName.textContent;
-  // insert position in position input
   inputPosition.value = profilePosition.textContent;
 };
 // open add popup
 function openPopupAdd() {
-  // popup__opened class add
   popupAdd.classList.add('popup_opened');
 };
 // close edit popup
 function closePopupEdit() {
-  // popup__opened class remove
   popupEdit.classList.remove('popup_opened');
 };
-// close add popup
-function closePopupAdd() {
-  // popup__opened class remove
-  popupAdd.classList.remove('popup_opened');
-};
-// submit edit form
-function submitFormEdit (evt) {
+// edit profile info
+function editProfileInfo (evt) {
   evt.preventDefault();
   // profile name and position replace by input values
   profileName.textContent = inputName.value;
@@ -128,6 +121,6 @@ buttonCloseEdit.addEventListener('click', closePopupEdit);
 // close add button listener
 buttonCloseAdd.addEventListener('click', closePopupAdd);
 // submit edit handler
-formEdit.addEventListener('submit', submitFormEdit);
+formEdit.addEventListener('submit', editProfileInfo);
 // submit add handler
 formAdd.addEventListener('submit', addCard);
