@@ -3,43 +3,28 @@ const initialCards = [
   {
     name: 'Санкт-Петербург',
     link: './images/spb.jpg',
-    alt: 'Дворцовая площадь Санкт-Петербурга'
   },
   {
     name: 'Москва',
     link: './images/moscow.jpg',
-    alt: 'Деловой центр Москва-Сити'
   },
   {
     name: 'Кижи',
     link: './images/kizhy.jpg',
-    alt: 'Архитектурный ансамбль погоста Кижи'
   },
   {
     name: 'Хибины',
     link: './images/khibiny.jpg',
-    alt: 'Заснеженные Хибины'
   },
   {
     name: 'Мурманск',
     link: './images/murmansk.jpg',
-    alt: 'Памятник Защитникам Советского Заполярья'
   },
   {
     name: 'Кронштадт',
     link: './images/kronshtadt.jpg',
-    alt: 'Морской Никольский собор'
   }
 ];
-const initialCardsNames = initialCards.map(el => el.name);
-const initialCardsLinks = initialCards.map(el => el.link);
-const initialCardsAlts = initialCards.map(el => el.alt);
-console.log(initialCardsNames);
-console.log(initialCardsLinks);
-console.log(initialCardsAlts);
-
-// find cards__container in DOM
-const cardsContainer = document.querySelector('.cards__container');
 // find edit popup in DOM
 const popupEdit = document.querySelector('.popup_type_edit');
 // find add popup in DOM
@@ -57,29 +42,49 @@ const formEdit = popupEdit.querySelector('.form');
 // find name and position inputs in edit form
 const inputName = formEdit.querySelector('.form__input_value_name');
 const inputPosition = formEdit.querySelector('.form__input_value_position');
+// find add form in DOM
+const formAdd = popupAdd.querySelector('.form');
+// find name and link inputs in add form
+const inputPhotoName = formAdd.querySelector('.form__input_value_name');
+const inputPhotoLink = formAdd.querySelector('.form__input_value_link');
 // find close button in edit popup
 const buttonCloseEdit = popupEdit.querySelector('.popup__close');
 // find close button in add popup
 const buttonCloseAdd = popupAdd.querySelector('.popup__close');
+// find cards__container in DOM
+const cardsContainer = document.querySelector('.cards__container');
 
-// create card template
-const createCard = (photoName, photoLink, photoAlt) => {
-  return `<li class="card">
-  <button type="button" class="card__delete" aria-label="Кнопка удаления фотографии"></button>
-  <img class="card__image" src="" alt="">
-  <div class="card__info">
-    <h3 class="card__heading"></h3>
-    <button type="button" class="card__like" aria-label="Кнопка оценки фотографии"></button>
-  </div>
-</li>`
+//////////////////////////////////////////////////////////////////////////
+
+const createCard = (photoName, photoLink) => {
+  // find card template in DOM
+  const cardTemplate = document.querySelector('#card-template').content;
+  // clone card template
+  const card = cardTemplate.querySelector('.card').cloneNode(true);
+  card.querySelector('.card__heading').textContent = photoName;
+  card.querySelector('.card__image').src = photoLink;
+  return card;
 };
-
-const renderCards = () => {
-
+// card render
+const renderCard = (photoName, photoLink) => {
+  cardsContainer.prepend(createCard(photoName, photoLink));
+};
+// add new card
+const addCard = (evt) => {
+  evt.preventDefault();
+  const photoName = inputPhotoName.value;
+  const photoLink = inputPhotoLink.value;
+  renderCard(photoName, photoLink);
+  inputPhotoName.value = '';
+  inputPhotoLink.value = '';
 }
+// create initial cards
+const createInitialCards = initialCards.map(function(initialCard) {
+  return createCard(initialCard.name, initialCard.link);
+});
+cardsContainer.append(...createInitialCards);
 
-
-
+//////////////////////////////////////////////////////////////////////////
 
 // open edit popup
 function openPopupEdit() {
@@ -90,25 +95,21 @@ function openPopupEdit() {
   // insert position in position input
   inputPosition.value = profilePosition.textContent;
 };
-
 // open add popup
 function openPopupAdd() {
   // popup__opened class add
   popupAdd.classList.add('popup_opened');
 };
-
 // close edit popup
 function closePopupEdit() {
   // popup__opened class remove
   popupEdit.classList.remove('popup_opened');
 };
-
 // close add popup
 function closePopupAdd() {
   // popup__opened class remove
   popupAdd.classList.remove('popup_opened');
 };
-
 // submit edit form
 function submitFormEdit (evt) {
   evt.preventDefault();
@@ -118,11 +119,6 @@ function submitFormEdit (evt) {
   // close edit popup
   closePopupEdit();
 };
-
-
-// submit add form
-
-
 // edit button listener
 buttonEdit.addEventListener('click', openPopupEdit);
 // add button listener
@@ -133,6 +129,5 @@ buttonCloseEdit.addEventListener('click', closePopupEdit);
 buttonCloseAdd.addEventListener('click', closePopupAdd);
 // submit edit handler
 formEdit.addEventListener('submit', submitFormEdit);
-
-
 // submit add handler
+formAdd.addEventListener('submit', addCard);
