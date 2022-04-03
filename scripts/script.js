@@ -52,12 +52,19 @@ const buttonCloseEdit = popupEdit.querySelector('.popup__close');
 const buttonCloseAdd = popupAdd.querySelector('.popup__close');
 // find cards__container in DOM
 const cardsContainer = document.querySelector('.cards__container');
-
+// create card
 const createCard = (photoName, photoLink) => {
   const cardTemplate = document.querySelector('#card-template').content;
   const card = cardTemplate.querySelector('.card').cloneNode(true);
   card.querySelector('.card__heading').textContent = photoName;
   card.querySelector('.card__image').src = photoLink;
+  card.querySelector('.card__delete').addEventListener('click', () => {
+    card.remove();
+  });
+  const buttonLike = card.querySelector('.card__like');
+  buttonLike.addEventListener('click', () => {
+    buttonLike.classList.toggle('card__like_active');
+  });
   return card;
 };
 // card render

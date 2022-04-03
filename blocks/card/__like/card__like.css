@@ -19,7 +19,3 @@
 .card__like:hover {
   opacity: 0.5;
 }
-
-.card__like:active {
-  background-image: url(../../../images/heart_full.svg);
-}
