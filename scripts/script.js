@@ -24,34 +24,30 @@ const initialCards = [
     link: './images/kronshtadt.jpg',
   }
 ];
-// find edit popup in DOM
+// find elements in DOM
 const popupEdit = document.querySelector('.popup_type_edit');
-// find add popup in DOM
 const popupAdd = document.querySelector('.popup_type_add');
-// find profile name in DOM
+const popupImage = document.querySelector('.popup-image');
 const profileName = document.querySelector('.profile__name');
-// find profile position in DOM
 const profilePosition = document.querySelector('.profile__position');
-// find edit button in DOM
 const buttonEdit = document.querySelector('.profile__edit-button');
-// find add button in DOM
 const buttonAdd = document.querySelector('.profile__add-button');
-// find edit form in DOM
 const formEdit = popupEdit.querySelector('.form');
-// find name and position inputs in edit form
 const inputName = formEdit.querySelector('.form__input_value_name');
 const inputPosition = formEdit.querySelector('.form__input_value_position');
-// find add form in DOM
 const formAdd = popupAdd.querySelector('.form');
-// find name and link inputs in add form
 const inputPhotoName = formAdd.querySelector('.form__input_value_name');
 const inputPhotoLink = formAdd.querySelector('.form__input_value_link');
-// find close button in edit popup
 const buttonCloseEdit = popupEdit.querySelector('.popup__close');
-// find close button in add popup
 const buttonCloseAdd = popupAdd.querySelector('.popup__close');
-// find cards__container in DOM
+const buttonCloseImage = popupImage.querySelector('.popup-image__close');
 const cardsContainer = document.querySelector('.cards__container');
+
+// open image popup
+function openPopupImage() {
+  popupImage.classList.add('popup-image_opened');
+};
+
 // create card
 const createCard = (photoName, photoLink) => {
   const cardTemplate = document.querySelector('#card-template').content;
@@ -65,9 +61,16 @@ const createCard = (photoName, photoLink) => {
   buttonLike.addEventListener('click', () => {
     buttonLike.classList.toggle('card__like_active');
   });
+  const image = card.querySelector('.card__image');
+  image.addEventListener('click', () => {
+    openPopupImage();
+    popupImage.querySelector('.popup-image__caption').textContent = photoName;
+    popupImage.querySelector('.popup-image__photo').src = photoLink;
+  });
   return card;
 };
-// card render
+
+// render card
 const renderCard = (photoName, photoLink) => {
   cardsContainer.prepend(createCard(photoName, photoLink));
 };
@@ -87,13 +90,12 @@ const addCard = (evt) => {
   inputPhotoLink.value = '';
   closePopupAdd();
 }
+
 // create initial cards
 const createInitialCards = initialCards.map(function(initialCard) {
   return createCard(initialCard.name, initialCard.link);
 });
 cardsContainer.append(...createInitialCards);
-
-//////////////////////////////////////////////////////////////////////////
 
 // open edit popup
 function openPopupEdit() {
@@ -109,6 +111,10 @@ function openPopupAdd() {
 // close edit popup
 function closePopupEdit() {
   popupEdit.classList.remove('popup_opened');
+};
+// close image popup
+function closePopupImage() {
+  popupImage.classList.remove('popup-image_opened');
 };
 // edit profile info
 function editProfileInfo (evt) {
@@ -127,6 +133,8 @@ buttonAdd.addEventListener('click', openPopupAdd);
 buttonCloseEdit.addEventListener('click', closePopupEdit);
 // close add button listener
 buttonCloseAdd.addEventListener('click', closePopupAdd);
+// close image button listener
+buttonCloseImage.addEventListener('click', closePopupImage);
 // submit edit handler
 formEdit.addEventListener('submit', editProfileInfo);
 // submit add handler
