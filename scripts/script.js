@@ -27,7 +27,7 @@ const initialCards = [
 // find elements in DOM
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
-const popupImage = document.querySelector('.popup-image');
+const popupImage = document.querySelector('.popup_type_image');
 const profileName = document.querySelector('.profile__name');
 const profilePosition = document.querySelector('.profile__position');
 const buttonEdit = document.querySelector('.profile__edit-button');
@@ -40,12 +40,20 @@ const inputPhotoName = formAdd.querySelector('.form__input_value_name');
 const inputPhotoLink = formAdd.querySelector('.form__input_value_link');
 const buttonCloseEdit = popupEdit.querySelector('.popup__close');
 const buttonCloseAdd = popupAdd.querySelector('.popup__close');
-const buttonCloseImage = popupImage.querySelector('.popup-image__close');
+const buttonCloseImage = popupImage.querySelector('.popup__close');
 const cardsContainer = document.querySelector('.cards__container');
 
-// open image popup
-function openPopupImage() {
-  popupImage.classList.add('popup-image_opened');
+// open popup
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  // insert name and position in edit popup inputs
+  inputName.value = profileName.textContent;
+  inputPosition.value = profilePosition.textContent;
+};
+
+// close popup
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 };
 
 // create card
@@ -63,9 +71,9 @@ const createCard = (photoName, photoLink) => {
   });
   const image = card.querySelector('.card__image');
   image.addEventListener('click', () => {
-    openPopupImage();
-    popupImage.querySelector('.popup-image__caption').textContent = photoName;
-    popupImage.querySelector('.popup-image__photo').src = photoLink;
+    openPopup(popupImage);
+    popupImage.querySelector('.popup__caption').textContent = photoName;
+    popupImage.querySelector('.popup__photo').src = photoLink;
   });
   return card;
 };
@@ -73,11 +81,6 @@ const createCard = (photoName, photoLink) => {
 // render card
 const renderCard = (photoName, photoLink) => {
   cardsContainer.prepend(createCard(photoName, photoLink));
-};
-
-// close add popup
-function closePopupAdd() {
-  popupAdd.classList.remove('popup_opened');
 };
 
 // add new card
@@ -88,7 +91,7 @@ const addCard = (evt) => {
   renderCard(photoName, photoLink);
   inputPhotoName.value = '';
   inputPhotoLink.value = '';
-  closePopupAdd();
+  closePopup(popupAdd);
 }
 
 // create initial cards
@@ -96,26 +99,6 @@ const createInitialCards = initialCards.map(function(initialCard) {
   renderCard(initialCard.name, initialCard.link);
 });
 
-
-// open edit popup
-function openPopupEdit() {
-  popupEdit.classList.add('popup_opened');
-  // insert name and position in inputs
-  inputName.value = profileName.textContent;
-  inputPosition.value = profilePosition.textContent;
-};
-// open add popup
-function openPopupAdd() {
-  popupAdd.classList.add('popup_opened');
-};
-// close edit popup
-function closePopupEdit() {
-  popupEdit.classList.remove('popup_opened');
-};
-// close image popup
-function closePopupImage() {
-  popupImage.classList.remove('popup-image_opened');
-};
 // edit profile info
 function editProfileInfo (evt) {
   evt.preventDefault();
@@ -123,18 +106,18 @@ function editProfileInfo (evt) {
   profileName.textContent = inputName.value;
   profilePosition.textContent = inputPosition.value;
   // close edit popup
-  closePopupEdit();
+  closePopup(popupEdit);
 };
 // edit button listener
-buttonEdit.addEventListener('click', openPopupEdit);
+buttonEdit.addEventListener('click', openPopup(popupEdit));
 // add button listener
-buttonAdd.addEventListener('click', openPopupAdd);
+buttonAdd.addEventListener('click', openPopup(popupAdd));
 // close edit button listener
-buttonCloseEdit.addEventListener('click', closePopupEdit);
+buttonCloseEdit.addEventListener('click', closePopup(popupEdit));
 // close add button listener
-buttonCloseAdd.addEventListener('click', closePopupAdd);
+buttonCloseAdd.addEventListener('click', closePopup(popupAdd));
 // close image button listener
-buttonCloseImage.addEventListener('click', closePopupImage);
+buttonCloseImage.addEventListener('click', closePopup(popupImage));
 // submit edit handler
 formEdit.addEventListener('submit', editProfileInfo);
 // submit add handler
