@@ -93,9 +93,9 @@ const addCard = (evt) => {
 
 // create initial cards
 const createInitialCards = initialCards.map(function(initialCard) {
-  return createCard(initialCard.name, initialCard.link);
+  renderCard(initialCard.name, initialCard.link);
 });
-cardsContainer.append(...createInitialCards);
+
 
 // open edit popup
 function openPopupEdit() {
