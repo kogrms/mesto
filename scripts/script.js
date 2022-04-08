@@ -42,14 +42,17 @@ const buttonCloseEdit = popupEdit.querySelector('.popup__close');
 const buttonCloseAdd = popupAdd.querySelector('.popup__close');
 const buttonCloseImage = popupImage.querySelector('.popup__close');
 const cardsContainer = document.querySelector('.cards__container');
-let somePopup = null;
 
 // open popup
 function openPopup(somePopup) {
   somePopup.classList.add('popup_opened');
-  // insert name and position in edit popup inputs
+};
+
+// insert name and position in edit popup inputs
+function profileInputsFill(somePopup) {
   inputName.value = profileName.textContent;
   inputPosition.value = profilePosition.textContent;
+  openPopup(somePopup);
 };
 
 // close popup
@@ -110,7 +113,7 @@ function editProfileInfo (evt) {
   closePopup(popupEdit);
 };
 // edit button listener
-buttonEdit.addEventListener('click', () => openPopup(popupEdit));
+buttonEdit.addEventListener('click', () => profileInputsFill(popupEdit));
 // add button listener
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 // close edit button listener
