@@ -49,10 +49,10 @@ function openPopup(somePopup) {
 };
 
 // insert name and position in edit popup inputs
-function profileInputsFill(somePopup) {
+function fillProfileInputs() {
   inputName.value = profileName.textContent;
   inputPosition.value = profilePosition.textContent;
-  openPopup(somePopup);
+  openPopup(popupEdit);
 };
 
 // close popup
@@ -113,7 +113,7 @@ function editProfileInfo (evt) {
   closePopup(popupEdit);
 };
 // edit button listener
-buttonEdit.addEventListener('click', () => profileInputsFill(popupEdit));
+buttonEdit.addEventListener('click', () => fillProfileInputs(popupEdit));
 // add button listener
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 // close edit button listener
