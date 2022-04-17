@@ -10,7 +10,7 @@ const formEdit = popupEdit.querySelector('.form');
 const inputName = formEdit.querySelector('.form__input_value_name');
 const inputPosition = formEdit.querySelector('.form__input_value_position');
 const formAdd = popupAdd.querySelector('.form');
-const inputPhotoName = formAdd.querySelector('.form__input_value_name');
+const inputPhotoName = formAdd.querySelector('.form__input_value_place');
 const inputPhotoLink = formAdd.querySelector('.form__input_value_link');
 const buttonCloseEdit = popupEdit.querySelector('.popup__close');
 const buttonCloseAdd = popupAdd.querySelector('.popup__close');
@@ -20,6 +20,12 @@ const cardsContainer = document.querySelector('.cards__container');
 // open popup
 function openPopup(somePopup) {
   somePopup.classList.add('popup_opened');
+  window.addEventListener('keydown', (evt) => {
+    evt.preventDefault();
+    if(evt.key === 'Escape') {
+      closePopup(somePopup);
+    }
+  });
 };
 
 // insert name and position in edit popup inputs
@@ -31,7 +37,27 @@ function fillProfileInputs() {
 
 // close popup
 function closePopup(somePopup) {
+  window.removeEventListener('keydown');
   somePopup.classList.remove('popup_opened');
+  // // reset form
+  if (!somePopup.classList.contains('popup_type_image')) {
+    somePopup.querySelector('.form').reset();
+  };
+  // remove errors
+  const errorList = Array.from(somePopup.querySelectorAll('.form__input-error'));
+  errorList.forEach((error) => error.textContent = '');
+  // remove error class for inputs
+  const inputList = Array.from(somePopup.querySelectorAll('.form__input'));
+  inputList.forEach((input) => input.classList.remove('form__input_type_error'));
+  // remove inactive class for edit button
+  const buttonElement = somePopup.querySelector('.form__submit-button');
+  if (somePopup.classList.contains('popup_type_edit')) {
+    buttonElement.classList.remove('form__submit-button_inactive');
+  }
+  // add inactive class for edit button
+  else if (somePopup.classList.contains('popup_type_add')) {
+  buttonElement.classList.add('form__submit-button_inactive');
+  };
 };
 
 // create card
@@ -82,13 +108,11 @@ const createInitialCards = initialCards.map(function(initialCard) {
 // edit profile info
 function editProfileInfo (evt) {
   evt.preventDefault();
-  if (!formEdit.querySelector('.form__submit-button').classList.contains('form__submit-button_inactive')) {
-    // profile name and position replace by input values
-    profileName.textContent = inputName.value;
-    profilePosition.textContent = inputPosition.value;
-    // close edit popup
-    closePopup(popupEdit);
-  };
+  // profile name and position replace by input values
+  profileName.textContent = inputName.value;
+  profilePosition.textContent = inputPosition.value;
+  // close edit popup
+  closePopup(popupEdit);
 };
 // edit button listener
 buttonEdit.addEventListener('click', () => fillProfileInputs(popupEdit));
