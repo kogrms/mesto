@@ -19,10 +19,9 @@ const cardsContainer = document.querySelector('.cards__container');
 
 // open popup
 function openPopup(somePopup) {
-  // add esc button event listener
   somePopup.classList.add('popup_opened');
+  // add esc button event listener
   window.addEventListener('keydown', (evt) => {
-    evt.preventDefault();
     if(evt.key !== 'Escape') {
       return;
     }
