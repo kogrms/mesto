@@ -19,10 +19,18 @@ const cardsContainer = document.querySelector('.cards__container');
 
 // open popup
 function openPopup(somePopup) {
+  // add esc button event listener
   somePopup.classList.add('popup_opened');
   window.addEventListener('keydown', (evt) => {
     evt.preventDefault();
-    if(evt.key === 'Escape') {
+    if(evt.key !== 'Escape') {
+      return;
+    }
+      closePopup(somePopup);
+  });
+  // add click outside popup event listener
+  somePopup.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget) {
       closePopup(somePopup);
     }
   });
@@ -37,7 +45,12 @@ function fillProfileInputs() {
 
 // close popup
 function closePopup(somePopup) {
-  window.removeEventListener('keydown');
+  window.removeEventListener('keydown', (evt) => {
+    evt.preventDefault();
+    if(evt.key === 'Escape') {
+      closePopup(somePopup);
+    }
+  });
   somePopup.classList.remove('popup_opened');
   // // reset form
   if (!somePopup.classList.contains('popup_type_image')) {
