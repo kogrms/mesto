@@ -16,6 +16,9 @@ const buttonCloseEdit = popupEdit.querySelector('.popup__close');
 const buttonCloseAdd = popupAdd.querySelector('.popup__close');
 const buttonCloseImage = popupImage.querySelector('.popup__close');
 const cardsContainer = document.querySelector('.cards__container');
+const cardTemplate = document.querySelector('#card-template').content;
+const popupImageCaption = popupImage.querySelector('.popup__caption');
+const popupImagePhoto = popupImage.querySelector('.popup__photo');
 
 // close popup by escape
 function closeByEscape(evt) {
@@ -80,7 +83,6 @@ function closePopup(somePopup) {
 
 // create card
 const createCard = (photoName, photoLink) => {
-  const cardTemplate = document.querySelector('#card-template').content;
   const card = cardTemplate.querySelector('.card').cloneNode(true);
   const image = card.querySelector('.card__image');
   card.querySelector('.card__heading').textContent = photoName;
@@ -93,11 +95,13 @@ const createCard = (photoName, photoLink) => {
   buttonLike.addEventListener('click', () => {
     buttonLike.classList.toggle('card__like_active');
   });
-  // const image = card.querySelector('.card__image');
   image.addEventListener('click', () => {
     openPopup(popupImage);
     popupImage.querySelector('.popup__caption').textContent = photoName;
     popupImage.querySelector('.popup__photo').src = photoLink;
+    popupImageCaption.querySelector('.popup__caption').textContent = photoName;
+    popupImagePhoto.querySelector('.popup__photo').src = photoLink;
+    popupImagePhoto.alt = photoName;
   });
   return card;
 };
