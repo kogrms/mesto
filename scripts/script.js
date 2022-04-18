@@ -59,26 +59,6 @@ function closePopup(somePopup) {
   window.removeEventListener('keydown', closeByEscape);
   // remove click on popup overlay event listener
   somePopup.removeEventListener('click', closeByClickOverlay);
-
-  // // reset form
-  if (!somePopup.classList.contains('popup_type_image')) {
-    somePopup.querySelector('.form').reset();
-  };
-  // remove errors
-  const errorList = Array.from(somePopup.querySelectorAll('.form__input-error'));
-  errorList.forEach((error) => error.textContent = '');
-  // remove error class for inputs
-  const inputList = Array.from(somePopup.querySelectorAll('.form__input'));
-  inputList.forEach((input) => input.classList.remove('form__input_type_error'));
-  // remove inactive class for edit button
-  const buttonElement = somePopup.querySelector('.form__submit-button');
-  if (somePopup.classList.contains('popup_type_edit')) {
-    buttonElement.classList.remove('form__submit-button_inactive');
-  }
-  // add inactive class for edit button
-  else if (somePopup.classList.contains('popup_type_add')) {
-  buttonElement.classList.add('form__submit-button_inactive');
-  };
 };
 
 // create card
@@ -99,8 +79,8 @@ const createCard = (photoName, photoLink) => {
     openPopup(popupImage);
     popupImage.querySelector('.popup__caption').textContent = photoName;
     popupImage.querySelector('.popup__photo').src = photoLink;
-    popupImageCaption.querySelector('.popup__caption').textContent = photoName;
-    popupImagePhoto.querySelector('.popup__photo').src = photoLink;
+    popupImageCaption.textContent = photoName;
+    popupImagePhoto.src = photoLink;
     popupImagePhoto.alt = photoName;
   });
   return card;
@@ -118,8 +98,9 @@ const addCard = (evt) => {
     const photoName = inputPhotoName.value;
     const photoLink = inputPhotoLink.value;
     renderCard(photoName, photoLink);
-    inputPhotoName.value = '';
-    inputPhotoLink.value = '';
+    // inputPhotoName.value = '';
+    // inputPhotoLink.value = '';
+    formAdd.reset();
     closePopup(popupAdd);
   };
 }
