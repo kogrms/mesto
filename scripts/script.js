@@ -17,22 +17,29 @@ const buttonCloseAdd = popupAdd.querySelector('.popup__close');
 const buttonCloseImage = popupImage.querySelector('.popup__close');
 const cardsContainer = document.querySelector('.cards__container');
 
+// close popup by escape
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
+// close popup by click on popup overlay
+function closeByClickOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
 // open popup
 function openPopup(somePopup) {
   somePopup.classList.add('popup_opened');
   // add esc button event listener
-  window.addEventListener('keydown', (evt) => {
-    if(evt.key !== 'Escape') {
-      return;
-    }
-      closePopup(somePopup);
-  });
-  // add click outside popup event listener
-  somePopup.addEventListener('click', (evt) => {
-    if (evt.target === evt.currentTarget) {
-      closePopup(somePopup);
-    }
-  });
+  window.addEventListener('keydown', closeByEscape);
+  // add click on popup overlay event listener
+  somePopup.addEventListener('click', closeByClickOverlay);
 };
 
 // insert name and position in edit popup inputs
@@ -44,13 +51,12 @@ function fillProfileInputs() {
 
 // close popup
 function closePopup(somePopup) {
-  window.removeEventListener('keydown', (evt) => {
-    evt.preventDefault();
-    if(evt.key === 'Escape') {
-      closePopup(somePopup);
-    }
-  });
   somePopup.classList.remove('popup_opened');
+  // remove esc button event listener
+  window.removeEventListener('keydown', closeByEscape);
+  // remove click on popup overlay event listener
+  somePopup.removeEventListener('click', closeByClickOverlay);
+
   // // reset form
   if (!somePopup.classList.contains('popup_type_image')) {
     somePopup.querySelector('.form').reset();
@@ -76,8 +82,10 @@ function closePopup(somePopup) {
 const createCard = (photoName, photoLink) => {
   const cardTemplate = document.querySelector('#card-template').content;
   const card = cardTemplate.querySelector('.card').cloneNode(true);
+  const image = card.querySelector('.card__image');
   card.querySelector('.card__heading').textContent = photoName;
-  card.querySelector('.card__image').src = photoLink;
+  image.src = photoLink;
+  image.alt = photoName;
   card.querySelector('.card__delete').addEventListener('click', () => {
     card.remove();
   });
@@ -85,7 +93,7 @@ const createCard = (photoName, photoLink) => {
   buttonLike.addEventListener('click', () => {
     buttonLike.classList.toggle('card__like_active');
   });
-  const image = card.querySelector('.card__image');
+  // const image = card.querySelector('.card__image');
   image.addEventListener('click', () => {
     openPopup(popupImage);
     popupImage.querySelector('.popup__caption').textContent = photoName;
