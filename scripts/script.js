@@ -75,8 +75,6 @@ const createCard = (photoName, photoLink) => {
   });
   image.addEventListener('click', () => {
     openPopup(popupImage);
-    popupImage.querySelector('.popup__caption').textContent = photoName;
-    popupImage.querySelector('.popup__photo').src = photoLink;
     popupImageCaption.textContent = photoName;
     popupImagePhoto.src = photoLink;
     popupImagePhoto.alt = photoName;
