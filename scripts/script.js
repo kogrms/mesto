@@ -12,13 +12,11 @@ const inputPosition = formEdit.querySelector('.form__input_value_position');
 const formAdd = popupAdd.querySelector('.form');
 const inputPhotoName = formAdd.querySelector('.form__input_value_place');
 const inputPhotoLink = formAdd.querySelector('.form__input_value_link');
-const buttonCloseEdit = popupEdit.querySelector('.popup__close');
-const buttonCloseAdd = popupAdd.querySelector('.popup__close');
-const buttonCloseImage = popupImage.querySelector('.popup__close');
 const cardsContainer = document.querySelector('.cards__container');
 const cardTemplate = document.querySelector('#card-template').content;
 const popupImageCaption = popupImage.querySelector('.popup__caption');
 const popupImagePhoto = popupImage.querySelector('.popup__photo');
+const popups = document.querySelectorAll('.popup');
 
 // close popup by escape
 function closeByEscape(evt) {
@@ -26,7 +24,7 @@ function closeByEscape(evt) {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
-}
+};
 
 // close popup by click on popup overlay
 function closeByClickOverlay(evt) {
@@ -34,7 +32,7 @@ function closeByClickOverlay(evt) {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
-}
+};
 
 // open popup
 function openPopup(somePopup) {
@@ -98,12 +96,10 @@ const addCard = (evt) => {
     const photoName = inputPhotoName.value;
     const photoLink = inputPhotoLink.value;
     renderCard(photoName, photoLink);
-    // inputPhotoName.value = '';
-    // inputPhotoLink.value = '';
     formAdd.reset();
     closePopup(popupAdd);
   };
-}
+};
 
 // create initial cards
 const createInitialCards = initialCards.map(function(initialCard) {
@@ -123,12 +119,14 @@ function editProfileInfo (evt) {
 buttonEdit.addEventListener('click', () => fillProfileInputs(popupEdit));
 // add button listener
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
-// close edit button listener
-buttonCloseEdit.addEventListener('click', () => closePopup(popupEdit));
-// close add button listener
-buttonCloseAdd.addEventListener('click', () => closePopup(popupAdd));
-// close image button listener
-buttonCloseImage.addEventListener('click', () => closePopup(popupImage));
+// close popup button listener
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup__close')) {
+      closePopup(popup)
+    }
+  })
+});
 // submit edit handler
 formEdit.addEventListener('submit', editProfileInfo);
 // submit add handler
