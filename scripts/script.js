@@ -89,14 +89,19 @@ const renderCard = (photoName, photoLink) => {
 
 // add new card
 const addCard = (evt) => {
-  if (!formAdd.querySelector('.form__submit-button').classList.contains('form__submit-button_inactive')) {
-    evt.preventDefault();
-    const photoName = inputPhotoName.value;
-    const photoLink = inputPhotoLink.value;
-    renderCard(photoName, photoLink);
-    formAdd.reset();
-    closePopup(popupAdd);
-  };
+  evt.preventDefault();
+  const photoName = inputPhotoName.value;
+  const photoLink = inputPhotoLink.value;
+  renderCard(photoName, photoLink);
+  formAdd.reset();
+  closePopup(popupAdd);
+  disableSubmitByAddingPhoto ()
+};
+
+const disableSubmitByAddingPhoto = () => {
+  const submitButton = formAdd.querySelector('.form__submit-button');
+  submitButton.classList.add('form__submit-button_inactive');
+  submitButton.setAttribute('disabled', true);
 };
 
 // create initial cards
