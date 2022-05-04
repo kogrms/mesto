@@ -13,10 +13,66 @@ const formAdd = popupAdd.querySelector('.form');
 const inputPhotoName = formAdd.querySelector('.form__input_value_place');
 const inputPhotoLink = formAdd.querySelector('.form__input_value_link');
 const cardsContainer = document.querySelector('.cards__container');
-const cardTemplate = document.querySelector('#card-template').content;
+// const cardTemplate = document.querySelector('.card-template').content;
 const popupImageCaption = popupImage.querySelector('.popup__caption');
 const popupImagePhoto = popupImage.querySelector('.popup__photo');
 const popups = document.querySelectorAll('.popup');
+
+const initialCards = [
+  {
+    name: 'Санкт-Петербург',
+    link: './images/spb.jpg',
+  },
+  {
+    name: 'Москва',
+    link: './images/moscow.jpg',
+  },
+  {
+    name: 'Кижи',
+    link: './images/kizhy.jpg',
+  },
+  {
+    name: 'Хибины',
+    link: './images/khibiny.jpg',
+  },
+  {
+    name: 'Мурманск',
+    link: './images/murmansk.jpg',
+  },
+  {
+    name: 'Кронштадт',
+    link: './images/kronshtadt.jpg',
+  }
+];
+
+
+
+import { Card } from '../scripts/Card.js';
+import { FormValidator } from '../scripts/FormValidator.js';
+
+initialCards.forEach((item) => {
+  // Создадим экземпляр карточки
+  const card = new Card(item.name, item.link, '.card-template');
+  // Создаём карточку и возвращаем наружу
+  const cardElement = card.generateCard();
+  // Добавляем в DOM
+  cardsContainer.append(cardElement);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // close popup by escape
 function closeByEscape(evt) {
@@ -104,10 +160,10 @@ const disableSubmitByAddingPhoto = () => {
   submitButton.setAttribute('disabled', true);
 };
 
-// create initial cards
-const createInitialCards = initialCards.map(function(initialCard) {
-  renderCard(initialCard.name, initialCard.link);
-});
+// // create initial cards
+// const createInitialCards = initialCards.map(function(initialCard) {
+//   renderCard(initialCard.name, initialCard.link);
+// });
 
 // edit profile info
 function editProfileInfo (evt) {

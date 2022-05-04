@@ -1,3 +1,16 @@
+export class FormValidator {
+  constructor(obj, formElement) {
+    this._obj = obj;
+    this._formElement = formElement;
+  }
+
+
+
+
+
+}
+
+
 
 const showInputError = (inputElement, errorMessage, obj) => {
   const errorElement = document.getElementById(`${inputElement.id}-error`);
