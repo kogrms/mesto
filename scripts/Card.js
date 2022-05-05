@@ -1,9 +1,9 @@
 export class Card {
-  constructor(photoName, photoLink, cardSelector) {
+  constructor(photoName, photoLink, cardSelector, openImagePopup) {
       this._photoName = photoName;
       this._photoLink = photoLink;
       this._cardSelector = cardSelector;
-      // this._openPopup = openPopup(popup);
+      this._openImagePopup = openImagePopup;
   }
 
   _getTemplate() {
@@ -23,7 +23,7 @@ export class Card {
       this._handleLikeClick();
     });
     this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._handleImageClick();
+      this._handleImageClick(this._photoName, this._photoLink);
     });
   }
 
@@ -37,10 +37,15 @@ export class Card {
 
   // open image popup
   _handleImageClick() {
-    // this._openPopup(document.querySelector('.popup_type_image'));
-    // popupImageCaption.textContent = photoName;
-    // popupImagePhoto.src = photoLink;
-    // popupImagePhoto.alt = photoName;
+    const popupImage = document.querySelector('.popup_type_image');
+    popupImage.querySelector('.popup__caption').textContent = this._photoName;
+    popupImage.querySelector('.popup__photo').alt = this._photoName;
+    popupImage.querySelector('.popup__photo').src = this._photoLink;
+    openPopup(popupImage)
+    // add esc button event listener
+    window.addEventListener('keydown', this._closeByEscape());
+    // add click on popup overlay event listener
+    popupImage.addEventListener('click', this._closeByClickOverlay());
   }
 
   generateCard() {
