@@ -1,5 +1,7 @@
+import { openImagePopup } from "../scripts/index.js";
+
 export class Card {
-  constructor(photoName, photoLink, cardSelector, openImagePopup) {
+  constructor(photoName, photoLink, cardSelector) {
       this._photoName = photoName;
       this._photoLink = photoLink;
       this._cardSelector = cardSelector;
@@ -35,30 +37,16 @@ export class Card {
     this._element.querySelector('.card__like').classList.toggle('card__like_active');
   }
 
-  // open image popup
   _handleImageClick() {
-    const popupImage = document.querySelector('.popup_type_image');
-    popupImage.querySelector('.popup__caption').textContent = this._photoName;
-    popupImage.querySelector('.popup__photo').alt = this._photoName;
-    popupImage.querySelector('.popup__photo').src = this._photoLink;
-    openPopup(popupImage)
-    // add esc button event listener
-    window.addEventListener('keydown', this._closeByEscape());
-    // add click on popup overlay event listener
-    popupImage.addEventListener('click', this._closeByClickOverlay());
+    openImagePopup (this._photoName, this._photoLink)
   }
 
   generateCard() {
-    // Запишем разметку в приватное поле _element.
-    // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate();
-    // добавим обработчики
     this._setEventListeners();
-    // Добавим данные
     this._element.querySelector('.card__image').src = this._photoLink;
     this._element.querySelector('.card__image').alt = this._photoName;
     this._element.querySelector('.card__heading').textContent = this._photoName;
-    // Вернём элемент наружу
     return this._element;
   }
 }

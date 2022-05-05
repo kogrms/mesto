@@ -114,13 +114,13 @@ function closePopup(somePopup) {
   somePopup.removeEventListener('click', closeByClickOverlay);
 };
 
-// // open image popup
-// function openImagePopup (photoName, photoLink) {
-//   openPopup(popupImage);
-//   popupImageCaption.textContent = photoName;
-//   popupImagePhoto.src = photoLink;
-//   popupImagePhoto.alt = photoName;
-// }
+// open image popup
+export function openImagePopup (photoName, photoLink) {
+  openPopup(popupImage);
+  popupImageCaption.textContent = photoName;
+  popupImagePhoto.src = photoLink;
+  popupImagePhoto.alt = photoName;
+}
 
 // // create card
 // const createCard = (photoName, photoLink) => {
