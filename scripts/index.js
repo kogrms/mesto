@@ -57,21 +57,18 @@ import { Card } from '../scripts/Card.js';
 import { FormValidator } from '../scripts/FormValidator.js';
 
 initialCards.forEach((item) => {
-  // Создадим экземпляр карточки
+  // Create Card instance
   const card = new Card(item.name, item.link, '.card-template');
-  // Создаём карточку и возвращаем наружу
+  // Create and return card
   const cardElement = card.generateCard();
-  // Добавляем в DOM
+  // Add card to DOM
   cardsContainer.append(cardElement);
 });
 
-// const EditFormValidator = new FormValidator(validationObject, '.card-template');
-// const AddFormValidator = new FormValidator(validationObject, '.card-template');
-
-
-
-
-
+const EditFormValidator = new FormValidator(validationObject, formEdit);
+const AddFormValidator = new FormValidator(validationObject, formAdd);
+EditFormValidator.enableValidation();
+AddFormValidator.enableValidation();
 
 // close popup by escape
 function closeByEscape(evt) {
@@ -155,7 +152,7 @@ const addCard = (evt) => {
   renderCard(photoName, photoLink);
   formAdd.reset();
   closePopup(popupAdd);
-  disableSubmitByAddingPhoto ()
+  disableSubmitByAddingPhoto()
 };
 
 const disableSubmitByAddingPhoto = () => {
