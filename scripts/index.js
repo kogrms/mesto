@@ -13,7 +13,7 @@ const formAdd = popupAdd.querySelector('.form');
 const inputPhotoName = formAdd.querySelector('.form__input_value_place');
 const inputPhotoLink = formAdd.querySelector('.form__input_value_link');
 const cardsContainer = document.querySelector('.cards__container');
-// const cardTemplate = document.querySelector('.card-template').content;
+const cardTemplate = document.querySelector('.card-template').content;
 const popupImageCaption = popupImage.querySelector('.popup__caption');
 const popupImagePhoto = popupImage.querySelector('.popup__photo');
 const popups = document.querySelectorAll('.popup');
@@ -119,25 +119,25 @@ export function openImagePopup (photoName, photoLink) {
   popupImagePhoto.alt = photoName;
 }
 
-// // create card
-// const createCard = (photoName, photoLink) => {
-//   const card = cardTemplate.querySelector('.card').cloneNode(true);
-//   const image = card.querySelector('.card__image');
-//   card.querySelector('.card__heading').textContent = photoName;
-//   image.src = photoLink;
-//   image.alt = photoName;
-//   card.querySelector('.card__delete').addEventListener('click', () => {
-//     card.remove();
-//   });
-//   const buttonLike = card.querySelector('.card__like');
-//   buttonLike.addEventListener('click', () => {
-//     buttonLike.classList.toggle('card__like_active');
-//   });
-//   image.addEventListener('click', () => {
-//     openImagePopup(photoName, photoLink)
-//   });
-//   return card;
-// };
+// create card
+const createCard = (photoName, photoLink) => {
+  const card = cardTemplate.querySelector('.card').cloneNode(true);
+  const image = card.querySelector('.card__image');
+  card.querySelector('.card__heading').textContent = photoName;
+  image.src = photoLink;
+  image.alt = photoName;
+  card.querySelector('.card__delete').addEventListener('click', () => {
+    card.remove();
+  });
+  const buttonLike = card.querySelector('.card__like');
+  buttonLike.addEventListener('click', () => {
+    buttonLike.classList.toggle('card__like_active');
+  });
+  image.addEventListener('click', () => {
+    openImagePopup(photoName, photoLink)
+  });
+  return card;
+};
 
 // render card
 const renderCard = (photoName, photoLink) => {
