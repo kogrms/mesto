@@ -1,11 +1,12 @@
-import { openImagePopup } from "../scripts/index.js";
+import { openImagePopup } from "../scripts/utils.js";
 
 export class Card {
-  constructor(photoName, photoLink, cardSelector) {
+  constructor(photoName, photoLink, cardSelector, imageselector) {
       this._photoName = photoName;
       this._photoLink = photoLink;
       this._cardSelector = cardSelector;
       this._openImagePopup = openImagePopup;
+      this._imageselector = imageselector;
   }
 
   _getTemplate() {
@@ -43,9 +44,10 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    const image = this._element.querySelector(this._imageselector);
     this._setEventListeners();
-    this._element.querySelector('.card__image').src = this._photoLink;
-    this._element.querySelector('.card__image').alt = this._photoName;
+    image.src = this._photoLink;
+    image.alt = this._photoName;
     this._element.querySelector('.card__heading').textContent = this._photoName;
     return this._element;
   }
