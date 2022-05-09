@@ -4,11 +4,18 @@ const popupImagePhoto = popupImage.querySelector('.popup__photo');
 
 // close popup
 export function closePopup(somePopup) {
+  const inputs = Array.from(somePopup.querySelectorAll('.form__input'));
   somePopup.classList.remove('popup_opened');
   // remove esc button event listener
   window.removeEventListener('keydown', closeByEscape);
   // remove click on popup overlay event listener
   somePopup.removeEventListener('click', closeByClickOverlay);
+  // clear input errors
+  inputs.forEach((inputElement) => {
+    const errorElement = document.getElementById(`${inputElement.id}-error`);
+    inputElement.classList.remove('form__input_type_error');
+    errorElement.textContent = '';
+  });
 };
 
 // close popup by escape

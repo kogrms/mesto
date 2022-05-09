@@ -12,7 +12,6 @@ const formAdd = popupAdd.querySelector('.form');
 const inputPhotoName = formAdd.querySelector('.form__input_value_place');
 const inputPhotoLink = formAdd.querySelector('.form__input_value_link');
 const cardsContainer = document.querySelector('.cards__container');
-// const cardTemplate = document.querySelector('.card-template').content;
 const popups = document.querySelectorAll('.popup');
 
 import { initialCards } from '../scripts/initialCards.js';
@@ -55,54 +54,12 @@ const AddFormValidator = new FormValidator(validationObject, formAdd);
 EditFormValidator.enableValidation();
 AddFormValidator.enableValidation();
 
-// // close popup by escape
-// function closeByEscape(evt) {
-//   if (evt.key === 'Escape') {
-//     const openedPopup = document.querySelector('.popup_opened');
-//     closePopup(openedPopup);
-//   }
-// };
-
-// // close popup by click on popup overlay
-// function closeByClickOverlay(evt) {
-//   if (evt.target === evt.currentTarget) {
-//     const openedPopup = document.querySelector('.popup_opened');
-//     closePopup(openedPopup);
-//   }
-// };
-
-// // open popup
-// function openPopup(somePopup) {
-//   somePopup.classList.add('popup_opened');
-//   // add esc button event listener
-//   window.addEventListener('keydown', closeByEscape);
-//   // add click on popup overlay event listener
-//   somePopup.addEventListener('click', closeByClickOverlay);
-// };
-
 // insert name and position in edit popup inputs
 function fillProfileInputs() {
   inputName.value = profileName.textContent;
   inputPosition.value = profilePosition.textContent;
   openPopup(popupEdit);
 };
-
-// // close popup
-// function closePopup(somePopup) {
-//   somePopup.classList.remove('popup_opened');
-//   // remove esc button event listener
-//   window.removeEventListener('keydown', closeByEscape);
-//   // remove click on popup overlay event listener
-//   somePopup.removeEventListener('click', closeByClickOverlay);
-// };
-
-// // open image popup
-// export function openImagePopup (photoName, photoLink) {
-//   openPopup(popupImage);
-//   popupImageCaption.textContent = photoName;
-//   popupImagePhoto.src = photoLink;
-//   popupImagePhoto.alt = photoName;
-// }
 
 // add new card
 const addCard = (evt) => {
@@ -112,19 +69,8 @@ const addCard = (evt) => {
   renderCard(photoName, photoLink);
   formAdd.reset();
   closePopup(popupAdd);
-AddFormValidator.disableSubmitButton();
+  AddFormValidator.disableSubmitButton();
 };
-
-// const disableSubmitByAddingPhoto = () => {
-//   const submitButton = formAdd.querySelector('.form__submit-button');
-//   submitButton.classList.add('form__submit-button_inactive');
-//   submitButton.setAttribute('disabled', true);
-// };
-
-// // create initial cards
-// const createInitialCards = initialCards.map(function(initialCard) {
-//   renderCard(initialCard.name, initialCard.link);
-// });
 
 // edit profile info
 function editProfileInfo (evt) {
@@ -143,7 +89,7 @@ buttonAdd.addEventListener('click', () => openPopup(popupAdd));
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup__close')) {
-      closePopup(popup)
+      closePopup(popup);
     }
   })
 });
