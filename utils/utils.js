@@ -1,6 +1,8 @@
-const popupImage = document.querySelector('.popup_type_image');
-const popupImageCaption = popupImage.querySelector('.popup__caption');
-const popupImagePhoto = popupImage.querySelector('.popup__photo');
+import {
+  popupImage,
+  popupImageCaption,
+  popupImagePhoto
+} from './constants.js';
 
 // close popup
 export function closePopup(somePopup) {
@@ -19,12 +21,12 @@ export function closePopup(somePopup) {
 };
 
 // close popup by escape
-export function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-};
+// export function closeByEscape(evt) {
+//   if (evt.key === 'Escape') {
+//     const openedPopup = document.querySelector('.popup_opened');
+//     closePopup(openedPopup);
+//   }
+// };
 
 // close popup by click on popup overlay
 export function closeByClickOverlay(evt) {
@@ -37,9 +39,7 @@ export function closeByClickOverlay(evt) {
 // open popup
 export function openPopup(somePopup) {
   somePopup.classList.add('popup_opened');
-  // add esc button event listener
-  window.addEventListener('keydown', closeByEscape);
-  // add click on popup overlay event listener
+
   somePopup.addEventListener('click', closeByClickOverlay);
 };
 

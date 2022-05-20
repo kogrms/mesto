@@ -1,39 +1,32 @@
 // find elements in DOM
-const popupEdit = document.querySelector('.popup_type_edit');
-const popupAdd = document.querySelector('.popup_type_add');
-const profileName = document.querySelector('.profile__name');
-const profilePosition = document.querySelector('.profile__position');
-const buttonEdit = document.querySelector('.profile__edit-button');
-const buttonAdd = document.querySelector('.profile__add-button');
-const formEdit = popupEdit.querySelector('.form');
-const inputName = formEdit.querySelector('.form__input_value_name');
-const inputPosition = formEdit.querySelector('.form__input_value_position');
-const formAdd = popupAdd.querySelector('.form');
-const inputPhotoName = formAdd.querySelector('.form__input_value_place');
-const inputPhotoLink = formAdd.querySelector('.form__input_value_link');
-const cardsContainer = document.querySelector('.cards__container');
-const popups = document.querySelectorAll('.popup');
+import {
+  initialCards,
+  validationObject,
+  popupEdit,
+  popupAdd,
+  profileName,
+  profilePosition,
+  buttonEdit,
+  buttonAdd,
+  formEdit,
+  inputName,
+  inputPosition,
+  formAdd,
+  inputPhotoName,
+  inputPhotoLink,
+  cardsContainer,
+  popups
+} from '../utils/constants.js'
 
-import { initialCards } from '../scripts/initialCards.js';
-
-const validationObject = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit-button',
-  inactiveButtonClass: 'form__submit-button_inactive',
-  inputErrorClass: 'form__input_type_error',
-};
-
-import { Card } from '../scripts/Card.js';
-import { FormValidator } from '../scripts/FormValidator.js';
-import { openPopup } from "../scripts/utils.js";
-import { closePopup } from "../scripts/utils.js";
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js'
+import { openPopup } from "../utils/utils.js";
+import { closePopup } from "../utils/utils.js";
 
 // create card
 const createCard = (photoName, photoLink) => {
-  // Create Card instance
   const card = new Card(photoName, photoLink, '.card-template', '.card__image');
-  // Create and return card
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -85,14 +78,16 @@ function editProfileInfo (evt) {
 buttonEdit.addEventListener('click', () => fillProfileInputs(popupEdit));
 // add button listener
 buttonAdd.addEventListener('click', () => openPopup(popupAdd));
-// close popup button listener
-popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup__close')) {
-      closePopup(popup);
-    }
-  })
-});
+
+// // close popup button listener
+// popups.forEach((popup) => {
+//   popup.addEventListener('click', (evt) => {
+//     if (evt.target.classList.contains('popup__close')) {
+//       closePopup(popup);
+//     }
+//   })
+// });
+
 // submit edit handler
 formEdit.addEventListener('submit', editProfileInfo);
 // submit add handler
