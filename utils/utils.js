@@ -29,19 +29,18 @@ export function closePopup(somePopup) {
 // };
 
 // close popup by click on popup overlay
-export function closeByClickOverlay(evt) {
-  if (evt.target === evt.currentTarget) {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-};
+// export function closeByClickOverlay(evt) {
+//   if (evt.target === evt.currentTarget) {
+//     const openedPopup = document.querySelector('.popup_opened');
+//     closePopup(openedPopup);
+//   }
+// };
 
 // open popup
-export function openPopup(somePopup) {
-  somePopup.classList.add('popup_opened');
-
-  somePopup.addEventListener('click', closeByClickOverlay);
-};
+// export function openPopup(somePopup) {
+//   somePopup.classList.add('popup_opened');
+//   somePopup.addEventListener('click', closeByClickOverlay);
+// };
 
 // open image popup
 export function openImagePopup (photoName, photoLink) {
