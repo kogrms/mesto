@@ -1,33 +1,21 @@
-// import { openImagePopup } from '../utils/utils.js';
-
-export class Card {
-  constructor(photoName, photoLink, cardSelector, imageselector) {
-      this._photoName = photoName;
-      this._photoLink = photoLink;
-      this._cardSelector = cardSelector;
-      this._openImagePopup = openImagePopup;
-      this._imageselector = imageselector;
+class Card {
+  constructor(cardSelector, handleCardClick) {
+    this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   };
 
   _getTemplate() {
     const cardElement = document
-    .querySelector(this._cardSelector)
-    .content
-    .querySelector('.card')
-    .cloneNode(true);
+      .querySelector(this._cardSelector)
+      .content
+      .querySelector('.card')
+      .cloneNode(true);
     return cardElement;
   };
 
-  _setEventListeners() {
-    this._element.querySelector('.card__delete').addEventListener('click', () => {
-      this._handleDeleteClick();
-    });
-    this._element.querySelector('.card__like').addEventListener('click', () => {
-      this._handleLikeClick();
-    });
-    this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._handleImageClick(this._photoName, this._photoLink);
-    });
+  _getImage() {
+    const cardImage = this._element.querySelector('.card__image');
+    return cardImage;
   };
 
   _handleDeleteClick() {
@@ -38,17 +26,33 @@ export class Card {
     this._element.querySelector('.card__like').classList.toggle('card__like_active');
   };
 
-  _handleImageClick() {
-    openImagePopup (this._photoName, this._photoLink)
+  _setEventListeners() {
+    this._element.querySelector('.card__delete').addEventListener('click', () => {
+      this._handleDeleteClick();
+    });
+    this._element.querySelector('.card__like').addEventListener('click', () => {
+      this._handleLikeClick();
+    });
+    this._image.addEventListener('click', () => {
+      this._handleCardClick();
+    });
+  };
+};
+
+export class DefaultCards extends Card {
+  constructor(data, cardSelector, handleCardClick) {
+    super(cardSelector, handleCardClick);
+    this._name = data.name;
+    this._link = data.link;
   };
 
   generateCard() {
-    this._element = this._getTemplate();
-    const image = this._element.querySelector(this._imageselector);
-    this._setEventListeners();
-    image.src = this._photoLink;
-    image.alt = this._photoName;
-    this._element.querySelector('.card__heading').textContent = this._photoName;
+    this._element = super._getTemplate();
+    this._image = super._getImage();
+    super._setEventListeners();
+    this._image.src = this._link;
+    this._image.alt = this._name;
+    this._element.querySelector('.card__heading').textContent = this._name;
     return this._element;
   };
 };

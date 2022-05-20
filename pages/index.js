@@ -15,6 +15,7 @@ import {
   inputPhotoName,
   inputPhotoLink,
   cardsContainer,
+  popupImage,
   popups
 } from '../utils/constants.js'
 
