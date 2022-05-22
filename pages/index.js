@@ -39,10 +39,10 @@ cardList.renderItems();
 const imagePopups = new PopupWithImage(popupImage);
 imagePopups.setEventListeners();
 
-const EditFormValidator = new FormValidator(validationObject, formEdit);
-EditFormValidator.enableValidation();
-const AddFormValidator = new FormValidator(validationObject, formAdd);
-AddFormValidator.enableValidation();
+const editFormValidator = new FormValidator(validationObject, formEdit);
+editFormValidator.enableValidation();
+const addFormValidator = new FormValidator(validationObject, formAdd);
+addFormValidator.enableValidation();
 
 const userInfo = new UserInfo();
 
@@ -68,11 +68,11 @@ buttonEdit.addEventListener('click', () => {
   inputName.value = userInfo.getUserInfo().profileNameInput;
   inputPosition.value = userInfo.getUserInfo().profileInfoInput;
   newProfile.open();
-  EditFormValidator.resetValidation();
+  editFormValidator.resetValidation();
 });
 
 // add button listener
 buttonAdd.addEventListener('click', () => {
   newCard.open();
-  AddFormValidator.resetValidation();
+  addFormValidator.resetValidation();
 });
