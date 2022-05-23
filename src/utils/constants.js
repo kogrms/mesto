@@ -1,27 +1,34 @@
+import spb from '../images/spb.jpg';
+import msk from '../images/moscow.jpg';
+import kij from '../images/kizhy.jpg';
+import hib from '../images/khibiny.jpg';
+import mur from '../images/murmansk.jpg';
+import kro from '../images/kronshtadt.jpg';
+
 export const initialCards = [
   {
     name: 'Санкт-Петербург',
-    link: './images/spb.jpg',
+    link: spb,
   },
   {
     name: 'Москва',
-    link: './images/moscow.jpg',
+    link: msk,
   },
   {
     name: 'Кижи',
-    link: './images/kizhy.jpg',
+    link: kij,
   },
   {
     name: 'Хибины',
-    link: './images/khibiny.jpg',
+    link: hib,
   },
   {
     name: 'Мурманск',
-    link: './images/murmansk.jpg',
+    link: mur,
   },
   {
     name: 'Кронштадт',
-    link: './images/kronshtadt.jpg'
+    link: kro
   }
 ];
 
@@ -43,8 +50,4 @@ export const formEdit = popupEdit.querySelector('.form');
 export const inputName = formEdit.querySelector('.form__input_value_name');
 export const inputPosition = formEdit.querySelector('.form__input_value_position');
 export const formAdd = popupAdd.querySelector('.form');
-// export const inputPhotoName = formAdd.querySelector('.form__input_value_place');
-// export const inputPhotoLink = formAdd.querySelector('.form__input_value_link');
-// export const cardsContainer = document.querySelector('.cards__container');
-// export const popups = document.querySelectorAll('.popup');
 export const popupImage = document.querySelector('.popup_type_image');
