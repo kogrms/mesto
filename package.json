@@ -1,0 +1,26 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "Project Mesto",
+  "main": "index.js",
+  "scripts": {
+    "build": "rd /s /q dist && webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kogrms/mesto.git"
+  },
+  "author": "Konstantin Babushkin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kogrms/mesto/issues"
+  },
+  "homepage": "https://github.com/kogrms/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.0",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  }
+}

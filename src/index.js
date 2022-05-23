@@ -10,14 +10,14 @@ import {
   inputPosition,
   formAdd,
   popupImage
-} from '../utils/constants.js'
+} from './utils/constants.js'
 
-import { DefaultCards } from '../components/Card.js';
-import { FormValidator } from '../components/FormValidator.js';
-import { Section } from '../components/Section.js'
-import { UserInfo } from '../components/UserInfo.js'
-import { PopupWithForm } from '../components/PopupWithForm.js'
-import { PopupWithImage } from '../components/PopupWithImage.js'
+import { DefaultCards } from './components/Card.js';
+import { FormValidator } from './components/FormValidator.js';
+import { Section } from './components/Section.js';
+import { UserInfo } from './components/UserInfo.js';
+import { PopupWithForm } from './components/PopupWithForm.js';
+import { PopupWithImage } from './components/PopupWithImage.js';
 
 function createCard(item) {
   const card = new DefaultCards(item, '.card-template', () => {
