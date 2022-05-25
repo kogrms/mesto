@@ -21,6 +21,7 @@ export class Card {
   };
 
   _handleDeleteClick() {
+    this._element.remove();
     this._element = null;
   };
 
@@ -39,19 +40,8 @@ export class Card {
       this._handleCardClick();
     });
   };
-// };
-
-// export class DefaultCards extends Card {
-//   constructor(data, cardSelector, handleCardClick) {
-//     super(cardSelector, handleCardClick);
-//     this._name = data.name;
-//     this._link = data.link;
-//   };
 
   generateCard() {
-    // this._element = super._getTemplate();
-    // this._image = super._getImage();
-    // super._setEventListeners();
     this._element = this._getTemplate();
     this._image = this._getImage();
     this._setEventListeners();

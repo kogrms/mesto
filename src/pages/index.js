@@ -2,15 +2,15 @@ import './index.css';
 import {
   initialCards,
   validationObject,
-  popupEdit,
-  popupAdd,
+  // popupEdit,
+  // popupAdd,
   buttonEdit,
   buttonAdd,
   formEdit,
   inputName,
   inputPosition,
   formAdd,
-  popupImage
+  // popupImage
 } from '../utils/constants.js'
 
 import { Card } from '../components/Card.js';
@@ -37,7 +37,7 @@ const cardList = new Section({
 '.cards__container');
 cardList.renderItems();
 
-const imagePopup = new PopupWithImage(popupImage);
+const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 
 const editFormValidator = new FormValidator(validationObject, formEdit);
@@ -45,10 +45,10 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(validationObject, formAdd);
 addFormValidator.enableValidation();
 
-const userInfo = new UserInfo();
+const userInfo = new UserInfo('.profile__name', '.profile__position');
 
 const newProfile = new PopupWithForm({
-  popupSelector: popupEdit,
+  popupSelector: '.popup_type_edit',
   handleFormSubmit: (formData) => {
     userInfo.setUserInfo(formData.name, formData.position);
     newProfile.close();
@@ -57,7 +57,7 @@ const newProfile = new PopupWithForm({
 newProfile.setEventListeners();
 
 const newCard = new PopupWithForm({
-  popupSelector: popupAdd,
+  popupSelector: '.popup_type_add',
   handleFormSubmit: (formData) => {
     cardList.addItem(createCard({ name: formData.place, link: formData.link }));
     newCard.close();

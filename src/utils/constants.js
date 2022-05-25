@@ -42,12 +42,12 @@ export const validationObject = {
 
 export const popupEdit = document.querySelector('.popup_type_edit');
 export const popupAdd = document.querySelector('.popup_type_add');
-export const profileName = document.querySelector('.profile__name');
-export const profilePosition = document.querySelector('.profile__position');
+// export const profileName = document.querySelector('.profile__name');
+// export const profilePosition = document.querySelector('.profile__position');
 export const buttonEdit = document.querySelector('.profile__edit-button');
 export const buttonAdd = document.querySelector('.profile__add-button');
 export const formEdit = popupEdit.querySelector('.form');
 export const inputName = formEdit.querySelector('.form__input_value_name');
 export const inputPosition = formEdit.querySelector('.form__input_value_position');
 export const formAdd = popupAdd.querySelector('.form');
-export const popupImage = document.querySelector('.popup_type_image');
+// export const popupImage = document.querySelector('.popup_type_image');
