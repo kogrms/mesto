@@ -8,6 +8,7 @@
   background: 0;
   background-image: url(../../../images/delete_icon.svg);
   background-size: contain;
+  background-repeat: no-repeat;
   width: 18px;
   height: 19px;
   border: none;
