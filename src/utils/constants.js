@@ -48,3 +48,6 @@ export const formEdit = popupEdit.querySelector('.form');
 export const inputName = formEdit.querySelector('.form__input_value_name');
 export const inputPosition = formEdit.querySelector('.form__input_value_position');
 export const formAdd = popupAdd.querySelector('.form');
+export const buttonAvatar = document.querySelector('.profile__avatar-edit-button');
+export const popupAvatar = document.querySelector('.popup_type_avatar');
+export const avatarSave = popupAvatar.querySelector(".form__submit-button");

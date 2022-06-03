@@ -8,6 +8,9 @@ import {
   inputName,
   inputPosition,
   formAdd,
+  buttonAvatar,
+  popupAvatar,
+  avatarSave
 } from '../utils/constants.js'
 
 import { Card } from '../components/Card.js';
@@ -40,12 +43,12 @@ const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 
 
-
+//////////////////////////////////////////////////////////////////////////////
 
 const confirmPopup = new PopupWithConfirmation('.popup_type_confirm');
 confirmPopup.setEventListeners();
 
-
+//////////////////////////////////////////////////////////////////////////////
 
 
 const editFormValidator = new FormValidator(validationObject, formEdit);
@@ -54,6 +57,27 @@ const addFormValidator = new FormValidator(validationObject, formAdd);
 addFormValidator.enableValidation();
 
 const userInfo = new UserInfo('.profile__name', '.profile__position');
+
+///////////////////////////////////////////////////////////////////////////////
+
+const newAvatar = new PopupWithForm({
+  // popupSelector: '.popup_type_avatar',
+  // handleFormSubmit: (formData) => {
+  //     renderLoading(true, avatarSave)
+      // api.createNewAvatar(formData.link)
+      //     .then((link) => {
+      //         userInfo.setUserAvatar(link.avatar)
+      //         newAvatar.closePopup();
+      //     })
+      //     .catch((err) => console.log(err))
+      //     .finally(() => {
+      //         renderLoading(false, avatarSaveButton, "Сохранить")
+      //     });
+  // }
+})
+newAvatar.setEventListeners();
+
+////////////////////////////////////////////////////////////////////////////////
 
 const newProfile = new PopupWithForm({
   popupSelector: '.popup_type_edit',
@@ -89,7 +113,7 @@ buttonAdd.addEventListener('click', () => {
   addFormValidator.resetValidation();
 });
 
-
-
 // edit avatar listener
-buttonEdit.addEventListener('click', editProfile);
+buttonAvatar.addEventListener('click', () => {
+  newAvatar.open();
+});

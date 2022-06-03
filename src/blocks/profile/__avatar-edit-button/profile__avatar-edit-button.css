@@ -13,7 +13,7 @@
   background-image: url(../../../images/avatar_edit.svg);
   background-position: center;
   background-repeat: no-repeat;
-  transition: .5s;
+  transition: opacity 200ms ease-in-out;
 }
 
 .profile__avatar-edit-button:hover {
