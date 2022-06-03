@@ -2,15 +2,12 @@ import './index.css';
 import {
   initialCards,
   validationObject,
-  // popupEdit,
-  // popupAdd,
   buttonEdit,
   buttonAdd,
   formEdit,
   inputName,
   inputPosition,
   formAdd,
-  // popupImage
 } from '../utils/constants.js'
 
 import { Card } from '../components/Card.js';
@@ -19,11 +16,13 @@ import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithConfirmation } from '../components/PopupWithConfirmation';
 
 function createCard(item) {
-  const card = new Card(item, '.card-template', () => {
-    imagePopup.open({ name: item.name, link: item.link });
-  });
+  const card = new Card(item, '.card-template',
+    () => {imagePopup.open({ name: item.name, link: item.link })},
+    () => confirmPopup.open()
+  );
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -39,6 +38,15 @@ cardList.renderItems();
 
 const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
+
+
+
+
+const confirmPopup = new PopupWithConfirmation('.popup_type_confirm');
+confirmPopup.setEventListeners();
+
+
+
 
 const editFormValidator = new FormValidator(validationObject, formEdit);
 editFormValidator.enableValidation();

@@ -1,7 +1,8 @@
 export class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick, handleDeleteClick) {
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
     this._name = data.name;
     this._link = data.link;
   };
@@ -20,10 +21,10 @@ export class Card {
     return cardImage;
   };
 
-  _handleDeleteClick() {
-    this._element.remove();
-    this._element = null;
-  };
+  // _handleDeleteClick() {
+  //   this._element.remove();
+  //   this._element = null;
+  // };
 
   _handleLikeClick() {
     this._element.querySelector('.card__like').classList.toggle('card__like_active');
