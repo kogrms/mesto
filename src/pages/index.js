@@ -88,3 +88,8 @@ buttonAdd.addEventListener('click', () => {
   newCard.open();
   addFormValidator.resetValidation();
 });
+
+
+
+// edit avatar listener
+buttonEdit.addEventListener('click', editProfile);

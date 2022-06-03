@@ -12,7 +12,10 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/avatar_kusto.jpg')%>" alt="Аватар">
+        <!-- <div class="profile__avatar-container"></div>
+          <img class="profile__avatar" src="<%=require('./images/avatar_kusto.jpg')%>" alt="Аватар">
+          <button type="button" class="profile__avatar-edit-button" aria-label="Кнопка изменения аватара"></button>
+        </div> -->
         <div class="profile__info">
           <div class="profile__name-wrap">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -112,9 +115,30 @@
       <div class="popup__container">
         <button type="button" class="popup__close" aria-label="Кнопка закрытия окна подтверждения"></button>
         <h2 class="popup__heading">Вы уверены?</h2>
-        <button type="submit" class="form__submit-button confirm" aria-label="Кнопка подтверждения удаления фото">
-            Сохранить
-          </button>
+        <form class="form" name="confirm-form" action="#" method="get">
+          <button type="submit" class="form__submit-button" aria-label="Кнопка подтверждения удаления фото">
+            Да</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_type_avatar">
+      <div class="popup__container">
+        <button type="button" class="popup__close" aria-label="Кнопка закрытия окна изменения аватара"></button>
+        <h2 class="popup__heading">Обновить аватар</h2>
+        <form class="form" name="avatar-form" action="#" method="get">
+          <input
+            id="link"
+            type="url"
+            name="link"
+            class="form__input form__input_value_link"
+            autocomplete="off"
+            required
+            value=""
+            placeholder="Ссылка на картинку"
+          />
+          <span id="link-error" class="form__input-error"></span>
+          <button type="submit" class="form__submit-button" aria-label="Кнопка сохранения нового аватара">
+            Сохранить</button>
         </form>
       </div>
     </div>
