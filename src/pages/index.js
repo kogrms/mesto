@@ -28,12 +28,12 @@ import { Api } from '../components/Api';
 //////////////////////////////////////////////////////////////////////////////
 
 function createCard(item) {
-  const card = new Card(item, '.card-template', like, disike, currentId,
+  const card = new Card(item, '.card-template', like, dislike, currentId,
     () => {
       confirmPopup.openPopup();
       confirmPopup.handler(() =>
         api.deleteCard(item._id)
-        .then(() => card.removeCard())
+        .then(() => card.deleteCard())
         .catch(err => console.log(err)))
     },
     () => {
@@ -56,36 +56,34 @@ const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 //////////////////////////////////////////////////////////////////////////////
 
-const api = new Api(myId);
-api.getUserInfo()
-    .then((data) => {
-        userInfo.setUserAvatar(data.avatar)
-        userInfo.setUserInfo(data.name, data.about);
-    })
-    .catch((err) =>
-        console.log(err)
-    );
+const userInfo = new UserInfo();
 
+const api = new Api(myId);
+
+api.getUserInfo()
+  .then((data) => {
+    userInfo.setUserAvatar(data.avatar)
+    userInfo.setUserInfo(data.name, data.about);
+  })
+  .catch((err) =>
+    console.log(err)
+  );
 api.getInitialCard()
-    .then((items) => {
-        cardList.renderItems(items.reverse());
-    })
-    .catch((err) =>
-        console.log(err)
-    );
+  .then((items) => {
+    cardList.renderItems(items.reverse());
+  })
+  .catch((err) =>
+    console.log(err)
+  );
+
+const like = id => api.like(id);
+const dislike = id => api.dislike(id);
 
 //////////////////////////////////////////////////////////////////////////////
-
-
 const editFormValidator = new FormValidator(validationObject, formEdit);
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(validationObject, formAdd);
 addFormValidator.enableValidation();
-
-const userInfo = new UserInfo('.profile__name', '.profile__position');
-
-
-///////////////////////////////////////////////////////////////////////////////
 
 const confirmPopup = new PopupWithConfirmation('.popup_type_confirm');
 confirmPopup.setEventListeners();
@@ -115,8 +113,6 @@ const newAvatar = new PopupWithForm({
 })
 newAvatar.setEventListeners();
 
-////////////////////////////////////////////////////////////////////////////////
-
 const newProfile = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   handleFormSubmit: (formData) => {
@@ -125,6 +121,10 @@ const newProfile = new PopupWithForm({
   }
 });
 newProfile.setEventListeners();
+////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 const newCard = new PopupWithForm({
   popupSelector: '.popup_type_add',
@@ -135,6 +135,10 @@ const newCard = new PopupWithForm({
 });
 newCard.setEventListeners();
 
+
+
+
+////////////////////////////////////////////////////////////////////////////////
 const editProfile = () => {
   inputName.value = userInfo.getUserInfo().profileNameInput;
   inputPosition.value = userInfo.getUserInfo().profileInfoInput;
