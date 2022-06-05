@@ -13,7 +13,7 @@ import {
   avatarSave
 } from '../utils/constants.js'
 
-import { id } from "../utils/id";
+import { myId } from "../utils/myId";
 
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -44,25 +44,19 @@ function createCard(item) {
   return cardElement;
 };
 
-//////////////////////////////////////////////////////////////////////////////
-
-
 const cardList = new Section({
-  items: initialCards,
   renderer: (item) => {
     cardList.addItem(createCard(item));
   }
 },
 '.cards__container');
-cardList.renderItems();
-
-const imagePopup = new PopupWithImage('.popup_type_image');
-imagePopup.setEventListeners();
-
 
 //////////////////////////////////////////////////////////////////////////////
+const imagePopup = new PopupWithImage('.popup_type_image');
+imagePopup.setEventListeners();
+//////////////////////////////////////////////////////////////////////////////
 
-const api = new Api(id);
+const api = new Api(myId);
 api.getUserInfo()
     .then((data) => {
         userInfo.setUserAvatar(data.avatar)
@@ -95,6 +89,14 @@ const userInfo = new UserInfo('.profile__name', '.profile__position');
 
 const confirmPopup = new PopupWithConfirmation('.popup_type_confirm');
 confirmPopup.setEventListeners();
+
+// function showLoading(isLoading, button, defaultText) {
+//   if (isLoading) {
+//       button.textContent = "Сохранение..."
+//   } else {
+//       button.textContent = defaultText
+//   }
+// };
 
 const newAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
