@@ -13,6 +13,8 @@ import {
   avatarSave
 } from '../utils/constants.js'
 
+import { id } from "../utils/id";
+
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
@@ -20,15 +22,30 @@ import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithConfirmation } from '../components/PopupWithConfirmation';
+import { Api } from '../components/Api';
+
+
+//////////////////////////////////////////////////////////////////////////////
 
 function createCard(item) {
-  const card = new Card(item, '.card-template',
-    () => {imagePopup.open({ name: item.name, link: item.link })},
-    () => confirmPopup.open()
+  const card = new Card(item, '.card-template', like, disike, currentId,
+    () => {
+      confirmPopup.openPopup();
+      confirmPopup.handler(() =>
+        api.deleteCard(item._id)
+        .then(() => card.removeCard())
+        .catch(err => console.log(err)))
+    },
+    () => {
+      imagePopup.openPopup({ name: item.name, link: item.link });
+    }
   );
   const cardElement = card.generateCard();
   return cardElement;
 };
+
+//////////////////////////////////////////////////////////////////////////////
+
 
 const cardList = new Section({
   items: initialCards,
@@ -45,8 +62,23 @@ imagePopup.setEventListeners();
 
 //////////////////////////////////////////////////////////////////////////////
 
-const confirmPopup = new PopupWithConfirmation('.popup_type_confirm');
-confirmPopup.setEventListeners();
+const api = new Api(id);
+api.getUserInfo()
+    .then((data) => {
+        userInfo.setUserAvatar(data.avatar)
+        userInfo.setUserInfo(data.name, data.about);
+    })
+    .catch((err) =>
+        console.log(err)
+    );
+
+api.getInitialCard()
+    .then((items) => {
+        cardList.renderItems(items.reverse());
+    })
+    .catch((err) =>
+        console.log(err)
+    );
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -58,10 +90,14 @@ addFormValidator.enableValidation();
 
 const userInfo = new UserInfo('.profile__name', '.profile__position');
 
+
 ///////////////////////////////////////////////////////////////////////////////
 
+const confirmPopup = new PopupWithConfirmation('.popup_type_confirm');
+confirmPopup.setEventListeners();
+
 const newAvatar = new PopupWithForm({
-  // popupSelector: '.popup_type_avatar',
+  popupSelector: '.popup_type_avatar',
   // handleFormSubmit: (formData) => {
   //     renderLoading(true, avatarSave)
       // api.createNewAvatar(formData.link)

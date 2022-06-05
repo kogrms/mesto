@@ -2,14 +2,18 @@ import { Popup } from './Popup.js';
 export class PopupWithConfirmation extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    // this._image = this._popupElement.querySelector('.popup__photo');
-    // this._title = this._popupElement.querySelector('.popup__caption');
   };
 
-  // open(data) {
-  //   super.open();
-  //   this._image.src = data.link;
-  //   this._title.textContent = data.name;
-  //   this._image.alt = data.name;
-  // };
+  handler(handleDeleteCard) {
+    this._handleDeleteCard = handleDeleteCard;
+  }
+
+  setEventListeners() {
+    super.setEventListeners()
+    this._popupSelector.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._handleDeleteCard()
+      this.closePopup()
+    });
+  }
 };
