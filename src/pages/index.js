@@ -24,7 +24,6 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithConfirmation } from '../components/PopupWithConfirmation';
 import { Api } from '../components/Api';
 
-
 //////////////////////////////////////////////////////////////////////////////
 
 function createCard(item) {
@@ -88,14 +87,6 @@ addFormValidator.enableValidation();
 const confirmPopup = new PopupWithConfirmation('.popup_type_confirm');
 confirmPopup.setEventListeners();
 
-// function showLoading(isLoading, button, defaultText) {
-//   if (isLoading) {
-//       button.textContent = "Сохранение..."
-//   } else {
-//       button.textContent = defaultText
-//   }
-// };
-
 const newAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
   // handleFormSubmit: (formData) => {
@@ -123,20 +114,30 @@ const newProfile = new PopupWithForm({
 newProfile.setEventListeners();
 ////////////////////////////////////////////////////////////////////////////////
 
-
-
+function showLoading(isLoading, button, defaultText) {
+  if (isLoading) {
+      button.textContent = "Сохранение..."
+  } else {
+      button.textContent = defaultText
+  }
+};
 
 const newCard = new PopupWithForm({
   popupSelector: '.popup_type_add',
   handleFormSubmit: (formData) => {
-    cardList.addItem(createCard({ name: formData.place, link: formData.link }));
-    newCard.close();
+    showLoading(true, popupAddSubmit)
+    api.createNewCard(formData.name, formData.link)
+      .then((data) => {
+        cardList.addItem(createCard(data))
+        newCard.close();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        showLoading(false, popupAddSubmit, "Создать")
+      })
   }
 });
 newCard.setEventListeners();
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 const editProfile = () => {

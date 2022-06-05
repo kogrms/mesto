@@ -55,4 +55,5 @@ export const avatarSave = popupAvatar.querySelector(".form__submit-button");
 export const profileName = document.querySelector('.profile__name');
 export const profilePosition = document.querySelector('.profile__position');
 export const profileAvatar = document.querySelector('.profile__avatar');
+export const popupAddSubmit = popupAdd.querySelector('.form__submit-button');
 // export const
