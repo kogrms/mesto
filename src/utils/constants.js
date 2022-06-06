@@ -58,6 +58,6 @@ export const popupAvatarSubmit = popupAvatar.querySelector(".form__submit-button
 export const profileName = document.querySelector('.profile__name');
 export const profilePosition = document.querySelector('.profile__position');
 export const profileAvatar = document.querySelector('.profile__avatar');
-
+export const currentId = "f8d213fbf6ca8f17bbc87d9d";
 
 // export const
