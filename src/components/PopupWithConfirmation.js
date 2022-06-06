@@ -4,7 +4,7 @@ export class PopupWithConfirmation extends Popup {
     super(popupSelector);
   };
 
-  handler(handleDeleteCard) {
+  handleConfirm(handleDeleteCard) {
     this._handleDeleteCard = handleDeleteCard;
   }
 
@@ -13,7 +13,7 @@ export class PopupWithConfirmation extends Popup {
     this._popupSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleDeleteCard()
-      this.closePopup()
+      this.close()
     });
   }
 };

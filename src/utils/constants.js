@@ -50,10 +50,12 @@ export const inputPosition = formEdit.querySelector('.form__input_value_position
 export const formAdd = popupAdd.querySelector('.form');
 export const buttonAvatar = document.querySelector('.profile__avatar-edit-button');
 export const popupAvatar = document.querySelector('.popup_type_avatar');
-export const avatarSave = popupAvatar.querySelector(".form__submit-button");
+export const popupAvatarSubmit = popupAvatar.querySelector(".form__submit-button");
+export const formAvatar = popupAvatar.querySelector('.form');
 
 export const profileName = document.querySelector('.profile__name');
 export const profilePosition = document.querySelector('.profile__position');
 export const profileAvatar = document.querySelector('.profile__avatar');
 export const popupAddSubmit = popupAdd.querySelector('.form__submit-button');
+export const popupEditSubmit = popupEdit.querySelector('.form__submit-button');
 // export const
