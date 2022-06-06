@@ -1,18 +1,16 @@
 import './index.css';
 import {
-  initialCards,
   validationObject,
   buttonEdit,
   buttonAdd,
-  popupAddSubmit,
-  popupEditSubmit,
+  buttonAvatar,
   formEdit,
+  formAdd,
+  formAvatar,
   inputName,
   inputPosition,
-  formAdd,
-  buttonAvatar,
-  popupAvatar,
-  formAvatar,
+  popupEditSubmit,
+  popupAddSubmit,
   popupAvatarSubmit
 } from '../utils/constants.js'
 
@@ -26,8 +24,6 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithConfirmation } from '../components/PopupWithConfirmation';
 import { Api } from '../components/Api';
-
-//////////////////////////////////////////////////////////////////////////////
 
 function createCard(item) {
   const card = new Card(item, '.card-template', like, dislike, currentId,
@@ -56,7 +52,6 @@ const cardList = new Section({
 const userInfo = new UserInfo();
 
 const api = new Api(myId);
-
 api.getUserInfo()
   .then((data) => {
     userInfo.setUserAvatar(data.avatar)
@@ -150,14 +145,11 @@ const newCard = new PopupWithForm({
 });
 newCard.setEventListeners();
 
-////////////////////////////////////////////////////////////////////////////////
 const editProfile = () => {
   inputName.value = userInfo.getUserInfo().profileNameInput;
   inputPosition.value = userInfo.getUserInfo().profileInfoInput;
   newProfile.open();
-  ///////////////////////////////////////
-  editFormValidator.resetValidation();
-  //////////////////////////////////////
+  editFormValidator.resetValidation(popupEditSubmit);
 };
 
 // edit button listener
@@ -166,12 +158,11 @@ buttonEdit.addEventListener('click', editProfile);
 // add button listener
 buttonAdd.addEventListener('click', () => {
   newCard.open();
-  /////////////////////////////////////
-  addFormValidator.resetValidation();
-  /////////////////////////////////////
+  addFormValidator.resetValidation(popupAddSubmit);
 });
 
 // edit avatar listener
 buttonAvatar.addEventListener('click', () => {
   newAvatar.open();
+  avatarFormValidator.resetValidation(popupAvatarSubmit);
 });
