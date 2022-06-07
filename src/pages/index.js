@@ -133,7 +133,7 @@ const newCard = new PopupWithForm({
   popupSelector: '.popup_type_add',
   handleFormSubmit: (formData) => {
     showLoading(true, popupAddSubmit)
-    api.addNewCard(formData.name, formData.link)
+    api.addNewCard(formData.place, formData.link)
       .then((data) => {
         cardList.addItem(createCard(data))
         newCard.close();
