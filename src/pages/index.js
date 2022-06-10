@@ -12,7 +12,11 @@ import {
   popupEditSubmit,
   popupAddSubmit,
   popupAvatarSubmit,
-  currentId
+  popupConfirmSubmit,
+  currentId,
+  profileName,
+  profilePosition,
+  profileAvatar
 } from '../utils/constants.js'
 
 import { myId } from "../utils/myId";
@@ -26,19 +30,34 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithConfirmation } from '../components/PopupWithConfirmation';
 import { Api } from '../components/Api';
 
+function showLoading(isLoading, button, defaultText) {
+  if (isLoading) {
+      button.textContent = "Сохранение..."
+  } else {
+      button.textContent = defaultText
+  }
+};
+
 function createCard(item) {
   const card = new Card(item, '.card-template', like, dislike, currentId,
     () => {
       confirmPopup.open();
-      confirmPopup.handleConfirm(() =>
+      confirmPopup.handleConfirm(() => {
+        showLoading(true, popupConfirmSubmit)
         api.deleteCard(item._id)
-        .then(() => card.deleteCard())
-        .catch(err => console.log(err)))
+          .then(() => card.deleteCard())
+          .then(confirmPopup.close.bind(confirmPopup))
+          .catch(err => console.log(err))
+          .finally(() => {
+            showLoading(false, popupConfirmSubmit, "Да")
+          })
+      })
     },
     () => {
       imagePopup.open({ name: item.name, link: item.link });
     }
   );
+
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -50,24 +69,19 @@ const cardList = new Section({
 },
 '.cards__container');
 
-const userInfo = new UserInfo();
+const userInfo = new UserInfo(profileName, profilePosition, profileAvatar);
 
 const api = new Api(myId);
-api.getUserInfo()
-  .then((data) => {
-    userInfo.setUserAvatar(data.avatar)
-    userInfo.setUserInfo(data.name, data.about);
-  })
-  .catch((err) =>
-    console.log(err)
-  );
-api.getInitialCard()
-  .then((items) => {
-    cardList.renderItems(items.reverse());
-  })
-  .catch((err) =>
-    console.log(err)
-  );
+Promise.all([api.getUserInfo(), api.getInitialCard()])
+.then(([data, cards]) => {
+  // console.log(data);
+  userInfo.setUserAvatar(data.avatar);
+  userInfo.setUserInfo(data.name, data.about);
+  cardList.renderItems(cards.reverse());
+})
+.catch(err => {
+  console.log(err);
+});
 
 const like = id => api.like(id);
 const dislike = id => api.dislike(id);
@@ -86,14 +100,6 @@ imagePopup.setEventListeners();
 
 const confirmPopup = new PopupWithConfirmation('.popup_type_confirm');
 confirmPopup.setEventListeners();
-
-function showLoading(isLoading, button, defaultText) {
-  if (isLoading) {
-      button.textContent = "Сохранение..."
-  } else {
-      button.textContent = defaultText
-  }
-};
 
 const newAvatar = new PopupWithForm({
   popupSelector: '.popup_type_avatar',

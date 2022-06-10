@@ -43,6 +43,7 @@ export const validationObject = {
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupAvatar = document.querySelector('.popup_type_avatar');
+const popupConfirm = document.querySelector('.popup_type_confirm');
 
 export const buttonEdit = document.querySelector('.profile__edit-button');
 export const buttonAdd = document.querySelector('.profile__add-button');
@@ -54,10 +55,11 @@ export const inputName = formEdit.querySelector('.form__input_value_name');
 export const inputPosition = formEdit.querySelector('.form__input_value_position');
 export const popupEditSubmit = popupEdit.querySelector('.form__submit-button');
 export const popupAddSubmit = popupAdd.querySelector('.form__submit-button');
-export const popupAvatarSubmit = popupAvatar.querySelector(".form__submit-button");
+export const popupAvatarSubmit = popupAvatar.querySelector('.form__submit-button');
+export const popupConfirmSubmit = popupConfirm.querySelector('.form__submit-button');
+export const currentId = 'b02aa1771eae819636737318';
 export const profileName = document.querySelector('.profile__name');
 export const profilePosition = document.querySelector('.profile__position');
 export const profileAvatar = document.querySelector('.profile__avatar');
-export const currentId = "548cd43ebfe373ca6ab28d49";
 
 // export const

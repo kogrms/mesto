@@ -1,25 +1,24 @@
-import { profileName, profilePosition, profileAvatar } from '../utils/constants.js';
-
 export class UserInfo {
-  // constructor(profileNameSelector, profilePositionSelector) {
-  //   this._profileName = document.querySelector(profileNameSelector);
-  //   this._profilePosition = document.querySelector( profilePositionSelector);
-  // };
+  constructor(profileName, profilePosition, profileAvatar) {
+    this._profileName = profileName;
+    this._profilePosition = profilePosition;
+    this._profileAvatar = profileAvatar
+  };
 
   getUserInfo() {
     const userInfo = {
-      profileNameInput: profileName.textContent,
-      profileInfoInput: profilePosition.textContent
+      profileNameInput: this._profileName.textContent,
+      profileInfoInput: this._profilePosition.textContent
     }
     return userInfo
   };
 
   setUserInfo(name, position) {
-    profileName.textContent = name;
-    profilePosition.textContent = position;
+    this._profileName.textContent = name;
+    this._profilePosition.textContent = position;
   };
 
   setUserAvatar(link) {
-    profileAvatar.src = link
+    this._profileAvatar.src = link
   };
 };
